@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/* Paleta do manual da Puna: areia, oliva, terracota e taupe. */
+@theme {
+  --color-paper: #e0ceb4;
+  --color-paper-soft: #ede4d3;
+  --color-ink: #2c3224;
+  --color-ink-2: #3a4130;
+  --color-night: #181814;
+  --color-clay: #b85422;
+  --color-taupe: #aca391;
+  --color-line: #c9b799;
+
+  --font-editorial: "Fraunces", "Times New Roman", serif;
+  --font-sans: "Archivo", system-ui, sans-serif;
+
+  --radius-card: 18px;
+}
+
+html {
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+::selection {
+  color: var(--color-paper);
+  background: var(--color-clay);
+}
+
+[data-reveal] {
+  font-kerning: none;
+}
+
+/* Marca como máscara: herda a cor do texto (currentColor). */
+.brand-logo,
+.brand-simbolo,
+.brand-padrao {
+  display: block;
+  background-color: currentColor;
+  -webkit-mask: var(--mask) center / contain no-repeat;
+  mask: var(--mask) center / contain no-repeat;
+}
+.brand-logo { --mask: url("/brand/logo.svg"); aspect-ratio: 860 / 330; }
+.brand-simbolo { --mask: url("/brand/simbolo.svg"); aspect-ratio: 200 / 330; }
+.brand-padrao {
+  --mask: url("/brand/padrao.png");
+  -webkit-mask-size: auto 100%;
+  mask-size: auto 100%;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+}
+
+/* Janela do hero: mesma mecânica da LP Jacuzzi, agora em forma de chama/gota. */
+.hero-window {
+  clip-path: polygon(34% 6%, 50% 0%, 66% 6%, 66% 100%, 34% 100%, 34% 6%);
+}
+
+@media (max-width: 700px) {
+  .hero-window {
+    clip-path: polygon(14% 4%, 50% 0%, 86% 4%, 86% 100%, 14% 100%, 14% 4%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-window {
+    clip-path: none;
+  }
+}
+.brand-palavra { display:block; background-color: currentColor; --mask: url("/brand/palavra.svg"); -webkit-mask: var(--mask) center / contain no-repeat; mask: var(--mask) center / contain no-repeat; aspect-ratio: 615 / 330; }
