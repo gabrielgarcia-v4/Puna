@@ -58,7 +58,7 @@ export default function Hero() {
     <section ref={ref} id="inicio" aria-label="Puna Studios" className="relative z-20 h-svh min-h-[640px]">
       <div data-window className="hero-window absolute inset-0">
         <div data-window-in className="absolute inset-0 overflow-hidden bg-mint">
-          <div data-pattern className="absolute inset-y-[-6%] left-0 flex w-[400%] text-sage/35 will-change-transform">
+          <div data-pattern className="absolute inset-y-[-6%] left-0 flex w-[400%] text-sage/20 will-change-transform">
             <Padrao className="h-full w-1/2" />
             <Padrao className="h-full w-1/2" />
           </div>

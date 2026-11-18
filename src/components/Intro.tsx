@@ -31,7 +31,7 @@ export default function Intro() {
   return (
     <section ref={ref} id="estudio" className="relative z-10 overflow-hidden py-[clamp(150px,17vw,280px)]">
       <div className="pointer-events-none absolute inset-0 grid place-items-center">
-        <div data-intro-simbolo className="w-[min(40vw,480px)] text-mint max-md:w-[70vw]">
+        <div data-intro-simbolo className="w-[min(30vw,360px)] text-mint/70 max-md:w-[56vw]">
           <Simbolo className="w-full" />
         </div>
       </div>

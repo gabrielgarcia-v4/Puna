@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { revealLines } from "@/lib/animations";
 import { contato } from "@/content/site";
-import { Logo, Simbolo } from "./Brand";
+import { Logo } from "./Brand";
 import { PillLink } from "./ui";
 
 const canais = [
@@ -26,11 +26,6 @@ export default function Footer() {
           ease: "expo.out",
           scrollTrigger: { trigger: "[data-canais]", start: "top 92%", once: true },
         });
-        gsap.fromTo(
-          "[data-footer-simbolo]",
-          { rotation: -20, yPercent: 20 },
-          { rotation: 10, yPercent: 0, ease: "none", scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom bottom", scrub: 1.6 } },
-        );
       });
     },
     { scope: ref },
@@ -38,10 +33,6 @@ export default function Footer() {
 
   return (
     <footer ref={ref} id="contato" className="relative z-10 overflow-hidden bg-mint text-ink">
-      <div data-footer-simbolo className="pointer-events-none absolute -right-[6%] -bottom-[10%] w-[min(42vw,560px)] text-sage/40">
-        <Simbolo className="w-full" />
-      </div>
-
       <div className="relative mx-auto w-[min(100%-8vw,1500px)] pt-[clamp(130px,13vw,230px)] pb-10">
         <p className="text-[12px] tracking-[0.35em] text-ink/60 uppercase">Support your local studio®</p>
         <h2 data-reveal className="mt-6 max-w-[12ch] font-display text-[clamp(52px,8vw,150px)] leading-[0.92] font-normal tracking-[-0.04em]">

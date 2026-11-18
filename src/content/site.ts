@@ -17,22 +17,23 @@ export const faixa = ["Branding", "Conteúdo", "Performance", "Planejamento"];
 export const manifesto = "Marca não é logo. É o que as pessoas sentem quando lembram de você.";
 
 export const servicos = [
-  { nome: "Branding", frase: "Cara própria, do logo ao tom de voz.", tom: "mint" },
-  { nome: "Conteúdo", frase: "Vídeo e social com gente de verdade.", tom: "ink" },
-  { nome: "Performance", frase: "Atenção que vira resultado.", tom: "sand" },
-  { nome: "Planejamento", frase: "O mapa antes do movimento.", tom: "sage" },
+  { nome: "Branding", frase: "Cara própria, do logo ao tom de voz.", itens: ["Posicionamento", "Identidade visual", "Tom de voz"], tom: "mint" },
+  { nome: "Conteúdo", frase: "Vídeo e social com gente de verdade.", itens: ["Reels e vídeo", "Social media", "Design"], tom: "ink" },
+  { nome: "Performance", frase: "Atenção que vira resultado.", itens: ["Mídia paga", "Funil e CRM", "Relatórios"], tom: "sand" },
+  { nome: "Planejamento", frase: "O mapa antes do movimento.", itens: ["Diagnóstico", "Benchmarking", "Playbooks"], tom: "sage" },
 ] as const;
 
 // TODO antes de publicar: confirmar com cada cliente se o nome pode aparecer no site.
+// `slug` já reserva o endereço da página de cada cliente (ex.: /clientes/fr-consorcio), que ainda será criada.
 export const trabalhos = [
-  { cliente: "FR Consórcio", area: "Performance" },
-  { cliente: "Casamento", area: "Branding" },
-  { cliente: "Brasa Mind", area: "Conteúdo" },
-  { cliente: "AXEN Gestão", area: "Conteúdo" },
-  { cliente: "Bravos", area: "Planejamento" },
-  { cliente: "Moinhos Fitness", area: "Performance" },
-  { cliente: "Paloma Ferreira", area: "Planejamento" },
-  { cliente: "Thallys Varella", area: "Conteúdo" },
+  { cliente: "FR Consórcio", slug: "fr-consorcio", area: "Performance", tom: "mint" },
+  { cliente: "Casamentos", slug: "casamentos", area: "Branding", tom: "sand" },
+  { cliente: "Brasa Mind", slug: "brasa-mind", area: "Conteúdo", tom: "sage" },
+  { cliente: "AXEN Gestão", slug: "axen-gestao", area: "Conteúdo", tom: "mint" },
+  { cliente: "Bravos", slug: "bravos", area: "Planejamento", tom: "sand" },
+  { cliente: "Moinhos Fitness", slug: "moinhos-fitness", area: "Performance", tom: "sage" },
+  { cliente: "Paloma Ferreira", slug: "paloma-ferreira", area: "Planejamento", tom: "mint" },
+  { cliente: "Thallys Varella", slug: "thallys-varella", area: "Conteúdo", tom: "sand" },
 ] as const;
 
 export const tons = {
