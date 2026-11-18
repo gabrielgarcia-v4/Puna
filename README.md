@@ -22,7 +22,6 @@ Stack: Vite, React, TypeScript, Tailwind CSS v4, GSAP (ScrollTrigger, SplitText)
 ## Pendências antes de publicar
 
 - Confirmar com cada cliente se o nome pode aparecer na seção Trabalhos.
-- Trocar "Cliente de casamentos" pelo nome real em `src/content/site.ts`.
 
 ## Rodar localmente
 

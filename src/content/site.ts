@@ -24,10 +24,9 @@ export const servicos = [
 ] as const;
 
 // TODO antes de publicar: confirmar com cada cliente se o nome pode aparecer no site.
-// TODO: trocar "Cliente de casamentos" pelo nome real.
 export const trabalhos = [
   { cliente: "FR Consórcio", area: "Performance", tom: "mint" },
-  { cliente: "Cliente de casamentos", area: "Branding", tom: "sand" },
+  { cliente: "Casamento", area: "Branding", tom: "sand" },
   { cliente: "Brasa Mind", area: "Conteúdo", tom: "ink" },
   { cliente: "AXEN Gestão", area: "Conteúdo", tom: "sage" },
   { cliente: "Bravos", area: "Planejamento", tom: "mint" },
