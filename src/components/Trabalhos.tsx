@@ -25,28 +25,27 @@ export default function Trabalhos() {
           ease: "expo.out",
           scrollTrigger: { trigger: "[data-lista]", start: "top 85%", once: true },
         });
-        gsap.from("[data-linha]", {
-          scaleX: 0,
-          transformOrigin: "left",
-          duration: 1.4,
-          stagger: 0.07,
-          ease: "power3.inOut",
-          scrollTrigger: { trigger: "[data-lista]", start: "top 85%", once: true },
-        });
       });
 
       // Card que acompanha o cursor (só onde existe mouse).
       mm.add("(hover: hover) and (min-width: 900px)", () => {
         const card = ref.current!.querySelector<HTMLElement>("[data-card]")!;
-        gsap.set(card, { xPercent: 12, yPercent: -55, scale: 0, autoAlpha: 0 });
+        gsap.set(card, { scale: 0, autoAlpha: 0 });
         const x = gsap.quickTo(card, "x", { duration: 0.6, ease: "power3" });
         const y = gsap.quickTo(card, "y", { duration: 0.6, ease: "power3" });
         const r = gsap.quickTo(card, "rotation", { duration: 0.8, ease: "power3" });
         let lastX = 0;
+        const GAP = 28;
         const move = (e: PointerEvent) => {
           const box = ref.current!.getBoundingClientRect();
-          x(e.clientX - box.left);
-          y(e.clientY - box.top);
+          const w = card.offsetWidth;
+          const h = card.offsetHeight;
+          const px = e.clientX - box.left;
+          const py = e.clientY - box.top;
+          // Fica à direita do cursor; perto da borda direita, troca de lado. Nunca sai da seção.
+          const left = px + GAP + w > box.width - 16 ? px - GAP - w : px + GAP;
+          x(left);
+          y(gsap.utils.clamp(16, box.height - h - 16, py - h / 2));
           r(gsap.utils.clamp(-8, 8, (e.clientX - lastX) * 0.4));
           lastX = e.clientX;
         };
@@ -62,8 +61,8 @@ export default function Trabalhos() {
     if (!window.matchMedia("(hover: hover) and (min-width: 900px)").matches) return;
     gsap.to("[data-card]", { scale: i === null ? 0 : 1, autoAlpha: i === null ? 0 : 1, duration: 0.5, ease: "expo.out", overwrite: "auto" });
     gsap.to("[data-nome]", {
-      opacity: (k) => (i === null || k === i ? 1 : 0.25),
-      x: (k) => (k === i ? 24 : 0),
+      opacity: (k) => (i === null || k === i ? 1 : 0.22),
+      y: (k) => (k === i ? -6 : 0),
       duration: 0.6,
       ease: "expo.out",
       overwrite: "auto",
@@ -73,32 +72,30 @@ export default function Trabalhos() {
   const t = atual === null ? null : trabalhos[atual];
 
   return (
-    <section ref={ref} id="trabalhos" data-dark className="relative z-10 overflow-hidden bg-ink py-[clamp(110px,12vw,200px)] text-mint-soft">
-      <div className="mx-auto w-[min(100%-8vw,1440px)]">
-        <div className="flex items-end justify-between gap-8">
-          <h2 data-reveal className="max-w-[20ch] font-display text-[clamp(44px,5.6vw,96px)] leading-[0.95] font-normal tracking-[-0.035em]">
+    <section ref={ref} id="trabalhos" data-dark className="relative z-10 overflow-hidden bg-ink py-[clamp(100px,10vw,170px)] text-mint-soft">
+      <div className="mx-auto grid w-[min(100%-8vw,1440px)] gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-[6vw]">
+        <div className="flex flex-col justify-between gap-8">
+          <h2 data-reveal className="font-display text-[clamp(40px,4.4vw,76px)] leading-[0.95] font-normal tracking-[-0.035em]">
             Quem já criou <em className="font-light text-mint">com a gente</em>
           </h2>
-          <p className="hidden shrink-0 text-[12px] tracking-[0.35em] text-sage uppercase md:block">
-            {String(trabalhos.length).padStart(2, "0")} marcas
-          </p>
+          <p className="text-[12px] tracking-[0.35em] text-sage uppercase">{String(trabalhos.length).padStart(2, "0")} marcas · e contando</p>
         </div>
 
-        <ul data-lista className="mt-[clamp(56px,7vw,110px)]" onPointerLeave={() => mostrar(null)}>
+        {/* Nomes em fluxo contínuo, como um texto; cada um tem o slug da futura página. */}
+        <ul data-lista className="flex flex-wrap items-baseline gap-x-[0.3em] gap-y-1 text-[clamp(32px,4.2vw,68px)] leading-[1.15]" onPointerLeave={() => mostrar(null)}>
           {trabalhos.map((c, i) => (
-            <li key={c.slug} data-cliente={c.slug} className="relative" onPointerEnter={() => mostrar(i)}>
-              <span data-linha className="absolute inset-x-0 top-0 h-px bg-mint/15" />
-              <div className="flex items-center justify-between gap-6 py-[clamp(14px,1.6vw,24px)] max-sm:flex-col max-sm:items-start max-sm:gap-2">
-                <div className="overflow-hidden">
-                  <h3 data-nome className="font-display text-[clamp(40px,6.4vw,112px)] leading-[1] font-light tracking-[-0.035em]">
-                    {c.cliente}
-                  </h3>
-                </div>
-                <span className="flex shrink-0 items-center gap-3 text-[12px] tracking-[0.3em] text-sage uppercase">
-                  <span className={`size-2 rounded-full ${tons[c.tom].split(" ")[0]}`} />
-                  <span>{c.area}</span>
+            <li key={c.slug} data-cliente={c.slug} className="flex items-baseline gap-x-[0.3em]" onPointerEnter={() => mostrar(i)}>
+              <span className="overflow-hidden pb-[0.12em]">
+                <span data-nome className="inline-block cursor-default font-display font-light tracking-[-0.03em] whitespace-nowrap">
+                  {c.cliente}
+                  <sup className="ml-1 align-super font-sans text-[0.22em] tracking-[0.2em] text-sage">{String(i + 1).padStart(2, "0")}</sup>
                 </span>
-              </div>
+              </span>
+              {i < trabalhos.length - 1 && (
+                <span aria-hidden="true" className="font-display font-light text-sage/50">
+                  /
+                </span>
+              )}
             </li>
           ))}
         </ul>
@@ -107,7 +104,7 @@ export default function Trabalhos() {
       <div
         data-card
         aria-hidden="true"
-        className={`pointer-events-none invisible absolute top-0 left-0 z-20 hidden aspect-[3/4] w-[clamp(220px,20vw,300px)] flex-col justify-between rounded-[var(--radius-card)] p-6 shadow-[0_30px_60px_rgba(0,0,0,0.35)] min-[900px]:flex ${
+        className={`pointer-events-none invisible absolute top-0 left-0 z-20 hidden aspect-[3/4] w-[clamp(200px,16vw,250px)] flex-col justify-between rounded-[var(--radius-card)] p-6 shadow-[0_30px_60px_rgba(0,0,0,0.35)] min-[900px]:flex ${
           t ? tons[t.tom] : "bg-mint text-ink"
         }`}
       >
