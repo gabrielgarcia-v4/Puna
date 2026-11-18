@@ -1,9 +1,9 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Faixa from "@/components/Faixa";
 import Intro from "@/components/Intro";
 import Manifesto from "@/components/Manifesto";
 import Servicos from "@/components/Servicos";
-import Metodo from "@/components/Metodo";
 import Trabalhos from "@/components/Trabalhos";
 import Footer from "@/components/Footer";
 
@@ -13,10 +13,10 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <Faixa />
         <Intro />
         <Manifesto />
         <Servicos />
-        <Metodo />
         <Trabalhos />
       </main>
       <Footer />

@@ -13,16 +13,16 @@ Stack: Vite, React, TypeScript, Tailwind CSS v4, GSAP (ScrollTrigger, SplitText)
 
 ## Onde fica cada coisa
 
-- `src/content/site.ts` — todos os textos: manifesto, serviços, método, trabalhos e contato.
-- `src/components/` — uma seção por arquivo (Hero, Intro, Manifesto, Servicos, Metodo, Trabalhos, Footer).
+- `src/content/site.ts` — todos os textos: manifesto, faixa, serviços, clientes e contato.
+- `src/components/` — uma seção por arquivo (Hero, Faixa, Intro, Manifesto, Servicos, Trabalhos, Footer).
 - `src/components/Brand.tsx` — logo, palavra, símbolo e padrão como máscaras (a cor vem de `text-*`).
 - `public/brand/` — SVGs/PNG extraídos do `LOGOPUNA.pdf`.
-- `src/index.css` — paleta da marca (areia, oliva, terracota, taupe) e fontes.
+- `src/index.css` — paleta da marca (verde pastel, oliva, areia) e fontes (Fredoka + DM Sans).
 
 ## Pendências antes de publicar
 
 - Confirmar com cada cliente se o nome pode aparecer na seção Trabalhos.
-- Revisar os textos (manifesto, intro e método foram escritos a partir do Playbook 90 Dias e do vídeo da Puna).
+- Trocar "Cliente de casamentos" pelo nome real em `src/content/site.ts`.
 
 ## Rodar localmente
 

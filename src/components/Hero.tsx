@@ -16,20 +16,20 @@ export default function Hero() {
         const { motion, mobile } = ctx.conditions as { motion: boolean; mobile: boolean };
         if (!motion) return;
 
-        // Entrada
+        // Entrada com molejo: o logo "quica" ao chegar.
         gsap
           .timeline({ defaults: { ease: "power4.out" } })
-          .fromTo("[data-window-in]", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "power3.inOut" })
+          .fromTo("[data-window-in]", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, ease: "power3.inOut" })
           .from("[data-window-in] [data-pattern]", { scale: 1.25, duration: 2 }, 0)
-          .from("[data-logo-in]", { yPercent: 40, autoAlpha: 0, duration: 1.4 }, 0.45)
-          .from("[data-small]", { yPercent: 120, autoAlpha: 0, duration: 1, stagger: 0.1 }, 0.7)
-          .from("[data-simbolo-in]", { yPercent: 30, rotation: -12, autoAlpha: 0, duration: 1.8, ease: "expo.out" }, 0.75)
-          .from("[data-cta-in]", { scale: 0.6, rotation: -30, autoAlpha: 0, duration: 1, ease: "back.out(1.6)" }, 1.1);
+          .from("[data-logo-in]", { yPercent: 60, scale: 0.85, autoAlpha: 0, duration: 1.4, ease: "elastic.out(1, 0.6)" }, 0.5)
+          .from("[data-small]", { yPercent: 120, autoAlpha: 0, duration: 0.9, stagger: 0.1 }, 0.7)
+          .from("[data-simbolo-in]", { y: 120, rotation: -40, scale: 0.4, autoAlpha: 0, duration: 1.6, ease: "elastic.out(1, 0.5)" }, 0.8)
+          .from("[data-cta-in]", { scale: 0.4, rotation: -60, autoAlpha: 0, duration: 1.1, ease: "back.out(2)" }, 1.1);
 
-        // O padrão desliza devagar dentro da janela, como uma chama viva.
+        // Padrão deslizando e símbolo balançando: a página nunca fica parada.
         gsap.to("[data-pattern]", { xPercent: -50, duration: 60, ease: "none", repeat: -1 });
+        gsap.to("[data-simbolo-in]", { rotation: 8, y: -10, duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 2.4 });
 
-        // Scroll: hero fixo enquanto a janela abre, o logo encolhe e clareia e o símbolo desce.
         gsap
           .timeline({
             defaults: { ease: "none" },
@@ -43,15 +43,14 @@ export default function Hero() {
             },
           })
           .to("[data-window]", { clipPath: WINDOW_FULL, duration: 1 }, 0)
-          .to("[data-type]", { scale: mobile ? 0.94 : 0.82, yPercent: -8, duration: 1 }, 0)
-          .to("[data-type] [data-tint]", { color: "#ede4d3", duration: 0.7 }, 0.15)
-          .to("[data-simbolo]", { scale: 0.8, yPercent: 10, duration: 1 }, 0)
+          .to("[data-type]", { scale: mobile ? 0.94 : 0.84, yPercent: -8, duration: 1 }, 0)
+          .to("[data-simbolo]", { scale: 1.3, yPercent: 15, rotation: 20, duration: 1 }, 0)
           .to("[data-cta]", { autoAlpha: 0, y: 35, duration: 0.3 }, 0);
 
         gsap.to("[data-simbolo-drift]", {
-          yPercent: 22,
+          yPercent: 30,
           ease: "none",
-          scrollTrigger: { trigger: document.getElementById("estudio"), start: "top bottom", end: "top top", scrub: 1 },
+          scrollTrigger: { trigger: document.getElementById("faixa"), start: "top bottom", end: "top top", scrub: 1 },
         });
       });
     },
@@ -61,36 +60,30 @@ export default function Hero() {
   return (
     <section ref={ref} id="inicio" aria-label="Puna Studios" className="relative z-20 h-svh min-h-[640px]">
       <div data-window className="hero-window absolute inset-0">
-        <div data-window-in className="absolute inset-0 overflow-hidden bg-clay">
-          <div data-pattern className="absolute inset-y-[-6%] left-0 flex w-[400%] text-night/20 will-change-transform">
+        <div data-window-in className="absolute inset-0 overflow-hidden bg-mint">
+          <div data-pattern className="absolute inset-y-[-6%] left-0 flex w-[400%] text-sage/45 will-change-transform">
             <Padrao className="h-full w-1/2" />
             <Padrao className="h-full w-1/2" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-night/10 via-transparent to-night/30" />
         </div>
       </div>
 
-      <div data-type className="absolute top-[13%] left-[6%] z-10 w-[88%] text-center max-md:top-[20%] max-md:left-[5%] max-md:w-[90%]">
+      <div data-type className="absolute top-[14%] left-[6%] z-10 w-[88%] text-center max-md:top-[20%] max-md:left-[5%] max-md:w-[90%]">
         <div className="overflow-hidden">
-          <p data-small data-tint className="font-editorial text-[clamp(20px,2.4vw,40px)] leading-none tracking-[-0.03em] text-ink italic">
-            estúdio criativo local
+          <p data-small className="inline-block rounded-full bg-ink px-5 py-2 font-display text-[clamp(15px,1.4vw,22px)] font-medium text-mint">
+            estúdio criativo local ✦ POA
           </p>
         </div>
-        <div data-logo-in className="mt-[1.2vw]">
-          <h1 data-tint className="text-ink">
-            <Palavra className="mx-auto w-[min(100%,72svh)]" />
+        <div data-logo-in className="mt-[1.6vw]">
+          <h1 className="text-ink">
+            <Palavra className="mx-auto w-[min(100%,74svh)]" />
           </h1>
         </div>
-        <div className="overflow-hidden">
-          <p data-small data-tint className="mt-4 text-[clamp(11px,1vw,15px)] tracking-[0.3em] text-ink uppercase">
-            Branding · Conteúdo · Performance — Porto Alegre
-          </p>
-        </div>
       </div>
 
-      <div data-simbolo className="pointer-events-none absolute top-[69%] left-1/2 z-20 w-[min(7vw,104px)] -translate-x-1/2 max-md:top-[64%] max-md:w-[16vw]">
+      <div data-simbolo className="pointer-events-none absolute top-[66%] left-1/2 z-20 w-[min(8vw,120px)] -translate-x-1/2 max-md:top-[60%] max-md:w-[18vw]">
         <div data-simbolo-drift>
-          <div data-simbolo-in className="text-ink drop-shadow-[0_30px_30px_rgba(24,24,20,0.3)]">
+          <div data-simbolo-in className="text-ink">
             <Simbolo className="w-full" />
           </div>
         </div>
@@ -98,10 +91,10 @@ export default function Hero() {
 
       <div data-cta className="absolute bottom-[8%] left-[6%] z-30">
         <div data-cta-in>
-          <CircleLink href="#trabalhos" variant="outline">
-            VER
+          <CircleLink href="#trabalhos">
+            ver
             <br />
-            TRABALHOS
+            clientes
           </CircleLink>
         </div>
       </div>

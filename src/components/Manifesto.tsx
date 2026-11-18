@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { gsap, SplitText, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { manifesto } from "@/content/site";
-import { Simbolo } from "./Brand";
+import { Padrao } from "./Brand";
 
 export default function Manifesto() {
   const ref = useRef<HTMLElement>(null);
@@ -16,34 +16,37 @@ export default function Manifesto() {
           onSplit: (self) =>
             gsap.fromTo(
               self.words,
-              { opacity: 0.14 },
+              { opacity: 0.15, yPercent: 20 },
               {
                 opacity: 1,
-                stagger: 0.08,
+                yPercent: 0,
+                stagger: 0.1,
                 ease: "none",
-                scrollTrigger: { trigger: "[data-manifesto]", start: "top 80%", end: "bottom 50%", scrub: 1 },
+                scrollTrigger: { trigger: "[data-manifesto]", start: "top 80%", end: "bottom 45%", scrub: 1 },
               },
             ),
         });
-        gsap.from("[data-flame]", {
-          rotation: -25,
-          y: 40,
-          autoAlpha: 0,
-          duration: 2,
-          ease: "expo.out",
-          scrollTrigger: { trigger: ref.current, start: "top 75%", once: true },
-        });
+        gsap.fromTo(
+          "[data-manifesto-bg]",
+          { xPercent: 0 },
+          { xPercent: -25, ease: "none", scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: 1 } },
+        );
       });
     },
     { scope: ref },
   );
 
   return (
-    <section ref={ref} id="manifesto" className="relative z-10 mx-auto w-[min(100%-8vw,1240px)] pt-[clamp(140px,16vw,260px)] pb-[clamp(90px,10vw,170px)] text-center">
-      <div data-flame className="mx-auto mb-10 w-9 text-clay">
-        <Simbolo className="w-full" />
+    <section ref={ref} id="manifesto" className="relative z-10 overflow-hidden bg-mint py-[clamp(120px,14vw,240px)]">
+      <div data-manifesto-bg className="pointer-events-none absolute inset-y-0 left-0 flex w-[300%] text-sage/35">
+        <Padrao className="h-full w-1/3" />
+        <Padrao className="h-full w-1/3" />
+        <Padrao className="h-full w-1/3" />
       </div>
-      <p data-manifesto className="font-editorial text-[clamp(32px,4.2vw,72px)] leading-[1.08] font-light tracking-[-0.02em]">
+      <p
+        data-manifesto
+        className="relative mx-auto w-[min(100%-8vw,1200px)] text-center font-display text-[clamp(40px,6.4vw,112px)] leading-[1] font-semibold tracking-[-0.03em]"
+      >
         {manifesto}
       </p>
     </section>
