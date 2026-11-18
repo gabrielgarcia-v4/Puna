@@ -3,14 +3,6 @@ import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { revealLines } from "@/lib/animations";
 import { Simbolo } from "./Brand";
 
-// Adesivos que flutuam em volta da frase e reagem ao scroll em velocidades diferentes.
-const adesivos = [
-  { texto: "feito em POA", pos: "top-[12%] left-[5%]", estilo: "-rotate-6 bg-mint", vel: -30 },
-  { texto: "sem enrolação", pos: "top-[16%] right-[6%]", estilo: "rotate-3 bg-sand", vel: -55 },
-  { texto: "com dado", pos: "bottom-[14%] left-[12%]", estilo: "rotate-6 bg-sage", vel: -20 },
-  { texto: "criativo de verdade", pos: "bottom-[10%] right-[10%]", estilo: "-rotate-3 bg-mint", vel: -45 },
-];
-
 export default function Intro() {
   const ref = useRef<HTMLElement>(null);
 
@@ -18,25 +10,18 @@ export default function Intro() {
     () => {
       gsap.matchMedia().add(MOTION_OK, () => {
         revealLines(ref.current!);
-        gsap.from("[data-adesivo]", {
-          scale: 0,
-          rotation: -30,
-          duration: 1,
-          stagger: 0.12,
-          ease: "back.out(2.2)",
-          scrollTrigger: { trigger: ref.current, start: "top 70%", once: true },
-        });
-        gsap.utils.toArray<HTMLElement>("[data-float]").forEach((el) =>
-          gsap.to(el, {
-            yPercent: Number(el.dataset.float),
-            ease: "none",
-            scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: 1 },
-          }),
+        // O símbolo gira devagar atrás da frase, como um mandala.
+        gsap.fromTo(
+          "[data-intro-simbolo]",
+          { rotation: -40, scale: 0.85 },
+          { rotation: 40, scale: 1.05, ease: "none", scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: 1.6 } },
         );
-        gsap.to("[data-intro-simbolo]", {
-          rotation: 180,
-          ease: "none",
-          scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: 1 },
+        gsap.from("[data-intro-sub]", {
+          y: 24,
+          autoAlpha: 0,
+          duration: 1.4,
+          ease: "expo.out",
+          scrollTrigger: { trigger: "[data-intro-sub]", start: "top 90%", once: true },
         });
       });
     },
@@ -44,30 +29,22 @@ export default function Intro() {
   );
 
   return (
-    <section ref={ref} id="estudio" className="relative z-10 overflow-hidden py-[clamp(140px,16vw,260px)]">
-      <div data-float="-60" className="pointer-events-none absolute top-[18%] left-1/2 w-[min(46vw,560px)] -translate-x-1/2 text-mint">
-        <div data-intro-simbolo>
+    <section ref={ref} id="estudio" className="relative z-10 overflow-hidden py-[clamp(150px,17vw,280px)]">
+      <div className="pointer-events-none absolute inset-0 grid place-items-center">
+        <div data-intro-simbolo className="w-[min(40vw,480px)] text-mint max-md:w-[70vw]">
           <Simbolo className="w-full" />
         </div>
       </div>
 
       <h2
         data-reveal
-        className="relative mx-auto w-[min(100%-8vw,1100px)] text-center font-display text-[clamp(44px,7vw,120px)] leading-[0.95] font-semibold tracking-[-0.03em]"
+        className="relative mx-auto w-[min(100%-8vw,1000px)] text-center font-display text-[clamp(44px,6.4vw,112px)] leading-[0.98] font-normal tracking-[-0.035em]"
       >
-        Marcas com cara própria. Feitas de perto.
+        Marcas com cara própria, feitas <em className="font-light">de perto</em>.
       </h2>
-
-      {adesivos.map((a) => (
-        <div key={a.texto} data-float={a.vel} className={`absolute ${a.pos} max-md:hidden`}>
-          <span
-            data-adesivo
-            className={`block rounded-full border-2 border-ink px-5 py-2.5 font-display text-[clamp(16px,1.4vw,22px)] font-semibold shadow-[0_6px_0_#2c3224] ${a.estilo}`}
-          >
-            {a.texto}
-          </span>
-        </div>
-      ))}
+      <p data-intro-sub className="relative mt-8 text-center text-[clamp(11px,0.9vw,14px)] tracking-[0.35em] text-ink/60 uppercase">
+        Estratégia · Criação · Performance
+      </p>
     </section>
   );
 }

@@ -1,11 +1,8 @@
 import { useRef } from "react";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { revealLines } from "@/lib/animations";
-import { trabalhos, tons } from "@/content/site";
-import { Simbolo } from "./Brand";
-
-// Mosaico: alguns cards ocupam duas colunas para quebrar a grade.
-const largos = new Set([0, 3, 4, 7]);
+import { trabalhos } from "@/content/site";
+import { Arrow } from "./ui";
 
 export default function Trabalhos() {
   const ref = useRef<HTMLElement>(null);
@@ -15,14 +12,20 @@ export default function Trabalhos() {
       gsap.matchMedia().add(MOTION_OK, () => {
         revealLines(ref.current!);
         gsap.from("[data-trabalho]", {
-          y: 100,
-          rotation: (i) => (i % 2 ? 6 : -6),
-          scale: 0.9,
+          yPercent: 70,
           autoAlpha: 0,
-          duration: 1.1,
-          stagger: 0.07,
-          ease: "back.out(1.5)",
-          scrollTrigger: { trigger: "[data-mosaico]", start: "top 85%", once: true },
+          duration: 1.4,
+          stagger: 0.08,
+          ease: "expo.out",
+          scrollTrigger: { trigger: "[data-lista]", start: "top 85%", once: true },
+        });
+        gsap.from("[data-linha]", {
+          scaleX: 0,
+          transformOrigin: "left",
+          duration: 1.4,
+          stagger: 0.08,
+          ease: "power3.inOut",
+          scrollTrigger: { trigger: "[data-lista]", start: "top 85%", once: true },
         });
       });
     },
@@ -30,29 +33,24 @@ export default function Trabalhos() {
   );
 
   return (
-    <section ref={ref} id="trabalhos" data-dark className="relative z-10 bg-ink py-[clamp(100px,11vw,190px)] text-mint">
+    <section ref={ref} id="trabalhos" data-dark className="relative z-10 bg-ink py-[clamp(110px,12vw,200px)] text-mint-soft">
       <div className="mx-auto w-[min(100%-8vw,1440px)]">
-        <h2 data-reveal className="font-display text-[clamp(44px,6vw,104px)] leading-[0.95] font-semibold tracking-[-0.03em]">
-          Quem já criou com a gente
+        <p className="text-[12px] tracking-[0.35em] text-sage uppercase">Clientes</p>
+        <h2 data-reveal className="mt-5 max-w-[20ch] font-display text-[clamp(44px,5.6vw,96px)] leading-[0.95] font-normal tracking-[-0.035em]">
+          Quem já criou <em className="font-light text-mint">com a gente</em>
         </h2>
 
-        <ul data-mosaico className="mt-[clamp(48px,6vw,96px)] grid grid-cols-1 gap-4 sm:grid-cols-2 lg:auto-rows-[clamp(220px,17vw,280px)] lg:grid-cols-4">
-          {trabalhos.map((t, i) => (
-            <li
-              key={t.cliente}
-              data-trabalho
-              data-hover="lift"
-              className={`relative flex aspect-[4/3] flex-col lg:aspect-auto justify-between overflow-hidden rounded-[var(--radius-card)] p-[clamp(20px,2vw,30px)] ${tons[t.tom]} ${
-                largos.has(i) ? "lg:col-span-2" : ""
-              } ${t.tom === "ink" ? "outline outline-2 outline-mint/30" : ""}`}
-            >
-              <span className="w-fit rounded-full border-2 border-current px-3 py-1 font-display text-[13px] font-semibold tracking-wide uppercase">
-                {t.area}
-              </span>
-              <div className="pointer-events-none absolute -right-[6%] -bottom-[18%] w-[38%] opacity-20">
-                <Simbolo className="w-full" />
+        <ul data-lista className="mt-[clamp(56px,7vw,110px)]">
+          {trabalhos.map((t) => (
+            <li key={t.cliente} className="relative overflow-hidden">
+              <span data-linha className="absolute inset-x-0 top-0 h-px bg-mint/20" />
+              <div data-trabalho data-hover="nudge" className="flex items-baseline justify-between gap-6 py-[clamp(20px,2.2vw,34px)]">
+                <h3 className="font-display text-[clamp(30px,3.4vw,58px)] leading-none font-light tracking-[-0.02em]">{t.cliente}</h3>
+                <p className="flex shrink-0 items-center gap-3 text-[12px] tracking-[0.3em] text-sage uppercase">
+                  <span className="max-sm:hidden">{t.area}</span>
+                  <Arrow className="size-4" />
+                </p>
               </div>
-              <h3 className="relative font-display text-[clamp(28px,2.6vw,46px)] leading-[0.95] font-semibold tracking-[-0.02em]">{t.cliente}</h3>
             </li>
           ))}
         </ul>

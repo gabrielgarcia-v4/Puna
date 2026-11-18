@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { revealLines } from "@/lib/animations";
 import { servicos, tons } from "@/content/site";
-import { Simbolo } from "./Brand";
+import { Padrao } from "./Brand";
 
 export default function Servicos() {
   const ref = useRef<HTMLElement>(null);
@@ -12,7 +12,7 @@ export default function Servicos() {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => revealLines(ref.current!));
 
-      // Desktop: os cards deslizam na horizontal com a seção fixa; o símbolo de cada um gira junto.
+      // Desktop: os arcos deslizam na horizontal com a seção fixa; o padrão de cada um corre por dentro.
       mm.add(`${MOTION_OK} and (min-width: 900px)`, () => {
         const track = ref.current!.querySelector<HTMLElement>("[data-track]")!;
         const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
@@ -20,26 +20,21 @@ export default function Servicos() {
         const slide = gsap.to(track, {
           x: () => -distance(),
           ease: "none",
-          scrollTrigger: { trigger: "[data-pin]", start: "top top", end: () => `+=${distance()}`, pin: true, scrub: 1.2, invalidateOnRefresh: true },
+          scrollTrigger: { trigger: "[data-pin]", start: "top top", end: () => `+=${distance()}`, pin: true, scrub: 1.4, invalidateOnRefresh: true },
         });
 
-        gsap.utils.toArray<HTMLElement>("[data-servico-simbolo]").forEach((el, i) =>
+        gsap.utils.toArray<HTMLElement>("[data-arco-padrao]").forEach((el) =>
           gsap.fromTo(
             el,
-            { rotation: i % 2 ? 40 : -40, scale: 0.7 },
-            {
-              rotation: i % 2 ? -20 : 20,
-              scale: 1,
-              ease: "none",
-              scrollTrigger: { trigger: el.closest("li"), containerAnimation: slide, start: "left right", end: "right left", scrub: true },
-            },
+            { xPercent: -10 },
+            { xPercent: 0, ease: "none", scrollTrigger: { trigger: el.closest("li"), containerAnimation: slide, start: "left right", end: "right left", scrub: true } },
           ),
         );
       });
 
       mm.add(`${MOTION_OK} and (max-width: 899px)`, () => {
         gsap.utils.toArray<HTMLElement>("[data-servico]").forEach((el) =>
-          gsap.from(el, { y: 80, rotation: 4, autoAlpha: 0, duration: 1.2, ease: "back.out(1.4)", scrollTrigger: { trigger: el, start: "top 90%", once: true } }),
+          gsap.from(el, { y: 60, autoAlpha: 0, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } }),
         );
       });
     },
@@ -48,28 +43,29 @@ export default function Servicos() {
 
   return (
     <section ref={ref} id="servicos" className="relative z-10">
-      <div data-pin className="flex min-h-svh flex-col justify-center overflow-hidden py-14">
-        <h2
-          data-reveal
-          className="mx-auto mb-12 w-[min(100%-8vw,1700px)] font-display text-[clamp(44px,6vw,104px)] leading-[0.95] font-semibold tracking-[-0.03em]"
-        >
-          O que a gente faz
-        </h2>
+      <div data-pin className="flex min-h-svh flex-col justify-center overflow-hidden pt-28 pb-14">
+        <div className="mx-auto mb-12 flex w-[min(100%-8vw,1700px)] items-end justify-between gap-8">
+          <h2 data-reveal className="font-display text-[clamp(44px,5.6vw,96px)] leading-[0.95] font-normal tracking-[-0.035em]">
+            O que a gente <em className="font-light">faz</em>
+          </h2>
+          <p className="hidden text-[12px] tracking-[0.35em] text-ink/60 uppercase md:block">04 frentes</p>
+        </div>
 
-        <ol data-track className="flex flex-col gap-6 px-[4vw] min-[900px]:w-max min-[900px]:flex-row min-[900px]:gap-[2vw]">
+        <ol data-track className="flex flex-col gap-10 px-[4vw] min-[900px]:w-max min-[900px]:flex-row min-[900px]:gap-[2.4vw]">
           {servicos.map((s, i) => (
-            <li
-              key={s.nome}
-              data-servico
-              className={`relative flex min-h-[440px] flex-col justify-between overflow-hidden rounded-[var(--radius-card)] p-[clamp(26px,2.6vw,44px)] min-[900px]:h-[min(64vh,620px)] min-[900px]:w-[min(32vw,500px)] ${tons[s.tom]}`}
-            >
-              <span className="font-display text-[clamp(18px,1.4vw,22px)] font-semibold opacity-60">0{i + 1}</span>
-              <div data-servico-simbolo className="pointer-events-none absolute top-[6%] right-[-10%] w-[48%] opacity-20">
-                <Simbolo className="w-full" />
+            <li key={s.nome} data-servico className="flex flex-col gap-6 min-[900px]:w-[min(24vw,380px)]">
+              <div className={`relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[var(--radius-card)] ${tons[s.tom]}`}>
+                <div data-arco-padrao className="absolute inset-y-0 left-0 flex w-[260%] opacity-20">
+                  <Padrao className="h-full w-1/2" />
+                  <Padrao className="h-full w-1/2" />
+                </div>
               </div>
-              <div className="relative">
-                <h3 className="font-display text-[clamp(44px,4.2vw,76px)] leading-[0.95] font-semibold tracking-[-0.03em]">{s.nome}</h3>
-                <p className="mt-4 max-w-[22ch] text-[clamp(16px,1.3vw,20px)] leading-snug opacity-80">{s.frase}</p>
+              <div className="flex items-baseline gap-4">
+                <span className="font-display text-xl text-sage italic">0{i + 1}</span>
+                <div>
+                  <h3 className="font-display text-[clamp(32px,2.8vw,48px)] leading-none font-normal tracking-[-0.02em]">{s.nome}</h3>
+                  <p className="mt-3 max-w-[26ch] text-[15px] leading-relaxed text-ink/70">{s.frase}</p>
+                </div>
               </div>
             </li>
           ))}

@@ -17,7 +17,7 @@ Stack: Vite, React, TypeScript, Tailwind CSS v4, GSAP (ScrollTrigger, SplitText)
 - `src/components/` — uma seção por arquivo (Hero, Faixa, Intro, Manifesto, Servicos, Trabalhos, Footer).
 - `src/components/Brand.tsx` — logo, palavra, símbolo e padrão como máscaras (a cor vem de `text-*`).
 - `public/brand/` — SVGs/PNG extraídos do `LOGOPUNA.pdf`.
-- `src/index.css` — paleta da marca (verde pastel, oliva, areia) e fontes (Fredoka + DM Sans).
+- `src/index.css` — paleta da marca (verde pastel, oliva, areia) e fontes (Fraunces com eixo SOFT + DM Sans).
 
 ## Pendências antes de publicar
 

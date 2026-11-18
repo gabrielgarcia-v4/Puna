@@ -25,19 +25,19 @@ export const servicos = [
 
 // TODO antes de publicar: confirmar com cada cliente se o nome pode aparecer no site.
 export const trabalhos = [
-  { cliente: "FR Consórcio", area: "Performance", tom: "mint" },
-  { cliente: "Casamento", area: "Branding", tom: "sand" },
-  { cliente: "Brasa Mind", area: "Conteúdo", tom: "ink" },
-  { cliente: "AXEN Gestão", area: "Conteúdo", tom: "sage" },
-  { cliente: "Bravos", area: "Planejamento", tom: "mint" },
-  { cliente: "Moinhos Fitness", area: "Performance", tom: "ink" },
-  { cliente: "Paloma Ferreira", area: "Planejamento", tom: "sand" },
-  { cliente: "Thallys Varella", area: "Conteúdo", tom: "sage" },
+  { cliente: "FR Consórcio", area: "Performance" },
+  { cliente: "Casamento", area: "Branding" },
+  { cliente: "Brasa Mind", area: "Conteúdo" },
+  { cliente: "AXEN Gestão", area: "Conteúdo" },
+  { cliente: "Bravos", area: "Planejamento" },
+  { cliente: "Moinhos Fitness", area: "Performance" },
+  { cliente: "Paloma Ferreira", area: "Planejamento" },
+  { cliente: "Thallys Varella", area: "Conteúdo" },
 ] as const;
 
 export const tons = {
   mint: "bg-mint text-ink",
-  ink: "bg-ink text-mint",
+  ink: "bg-ink text-mint-soft",
   sand: "bg-sand text-ink",
   sage: "bg-sage text-ink",
 } as const;

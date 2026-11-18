@@ -43,7 +43,7 @@ export default function Header() {
         <Logo className="w-full" />
       </a>
 
-      <nav aria-label="Navegação principal" className="hidden gap-[clamp(22px,2.6vw,46px)] font-display text-[16px] font-medium md:flex">
+      <nav aria-label="Navegação principal" className="hidden gap-[clamp(22px,2.6vw,46px)] text-[12px] tracking-[0.18em] uppercase md:flex">
         {nav.map((l) => (
           <a key={l.href} href={l.href} data-hover="underline" className="relative py-3">
             {l.label}
@@ -72,7 +72,7 @@ export default function Header() {
         className="invisible absolute inset-x-4 top-4 flex flex-col rounded-3xl bg-paper-soft/95 px-4 pt-20 pb-4 text-ink opacity-0 shadow-2xl backdrop-blur-xl md:hidden"
       >
         {nav.map((l) => (
-          <a key={l.href} href={l.href} onClick={() => toggle(false)} tabIndex={open ? 0 : -1} className="rounded-xl px-3 py-4 font-display text-3xl font-semibold">
+          <a key={l.href} href={l.href} onClick={() => toggle(false)} tabIndex={open ? 0 : -1} className="rounded-xl px-3 py-4 font-display text-3xl">
             {l.label}
           </a>
         ))}
