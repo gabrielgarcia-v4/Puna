@@ -24,14 +24,15 @@ export const servicos = [
 ] as const;
 
 // TODO antes de publicar: confirmar com cada cliente se o nome pode aparecer no site.
+// `area` é o segmento do cliente (aparece no card do hover).
 // `slug` já reserva o endereço da página de cada cliente (ex.: /clientes/fr-consorcio), que ainda será criada.
 export const trabalhos = [
-  { cliente: "FR Consórcio", slug: "fr-consorcio", area: "Performance", tom: "mint" },
-  { cliente: "Casamentos", slug: "casamentos", area: "Branding", tom: "sand" },
-  { cliente: "Brasamind", slug: "brasamind", area: "Conteúdo", tom: "sage" },
-  { cliente: "AXEN Gestão", slug: "axen-gestao", area: "Conteúdo", tom: "mint" },
-  { cliente: "Bravos", slug: "bravos", area: "Planejamento", tom: "sand" },
-  { cliente: "Paloma Ferreira", slug: "paloma-ferreira", area: "Planejamento", tom: "sage" },
+  { cliente: "FR Consórcio", slug: "fr-consorcio", area: "Consórcio", tom: "mint" },
+  { cliente: "Casamentos", slug: "casamentos", area: "Eventos", tom: "sand" },
+  { cliente: "Brasamind", slug: "brasamind", area: "Evento de networking", tom: "sage" },
+  { cliente: "AXEN Gestão", slug: "axen-gestao", area: "Contabilidade", tom: "mint" },
+  { cliente: "Bravos", slug: "bravos", area: "Futebol americano", tom: "sand" },
+  { cliente: "Paloma Ferreira", slug: "paloma-ferreira", area: "Marca pessoal", tom: "sage" },
   { cliente: "Brasa Nobre", slug: "brasa-nobre", area: "Hamburgueria", tom: "mint" },
   { cliente: "The Bronx", slug: "the-bronx", area: "Barbearia", tom: "sand" },
   { cliente: "Bux Coffee", slug: "bux-coffee", area: "Cafeteria", tom: "sage" },
