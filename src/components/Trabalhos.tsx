@@ -108,7 +108,7 @@ export default function Trabalhos() {
           t ? tons[t.tom] : "bg-mint text-ink"
         }`}
       >
-        <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">{t?.area}</span>
+        <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">{t?.area || " "}</span>
         <div>
           <p className="font-display text-[clamp(30px,2.6vw,42px)] leading-[0.95] tracking-[-0.03em]">{t?.cliente}</p>
           <p className="mt-4 flex items-center gap-2 text-[13px] opacity-70">

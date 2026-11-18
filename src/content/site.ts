@@ -28,12 +28,14 @@ export const servicos = [
 export const trabalhos = [
   { cliente: "FR Consórcio", slug: "fr-consorcio", area: "Performance", tom: "mint" },
   { cliente: "Casamentos", slug: "casamentos", area: "Branding", tom: "sand" },
-  { cliente: "Brasa Mind", slug: "brasa-mind", area: "Conteúdo", tom: "sage" },
+  { cliente: "Brasamind", slug: "brasamind", area: "Conteúdo", tom: "sage" },
   { cliente: "AXEN Gestão", slug: "axen-gestao", area: "Conteúdo", tom: "mint" },
   { cliente: "Bravos", slug: "bravos", area: "Planejamento", tom: "sand" },
-  { cliente: "Moinhos Fitness", slug: "moinhos-fitness", area: "Performance", tom: "sage" },
-  { cliente: "Paloma Ferreira", slug: "paloma-ferreira", area: "Planejamento", tom: "mint" },
-  { cliente: "Thallys Varella", slug: "thallys-varella", area: "Conteúdo", tom: "sand" },
+  { cliente: "Paloma Ferreira", slug: "paloma-ferreira", area: "Planejamento", tom: "sage" },
+  // TODO: confirmar a área de Brasa Nobre, The Bronx e Bux Coffee (sem área, o card não mostra o rótulo).
+  { cliente: "Brasa Nobre", slug: "brasa-nobre", area: "", tom: "mint" },
+  { cliente: "The Bronx", slug: "the-bronx", area: "", tom: "sand" },
+  { cliente: "Bux Coffee", slug: "bux-coffee", area: "", tom: "sage" },
 ] as const;
 
 export const tons = {
