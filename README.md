@@ -29,3 +29,9 @@ Stack: Vite, React, TypeScript, Tailwind CSS v4, GSAP (ScrollTrigger, SplitText)
 npm install
 npm run dev
 ```
+
+## Publicação
+
+Hospedado na Vercel, conectado a este repositório: cada push na `main` publica sozinho.
+`vercel.json` faz todos os endereços (ex.: `/clientes/bux-coffee`) abrirem o site, para as futuras páginas de cliente.
+Domínio comprado na Hostinger, apontado para a Vercel pelo DNS.
