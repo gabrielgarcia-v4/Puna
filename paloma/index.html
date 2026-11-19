@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="paloma-assets/mark.png">
+<title>Paloma Ferreira · Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: apresentação em blocos de tela cheia, rolagem vertical, cada bloco = 1 slide falado. Identidade Puna (dark-first, acento pounamu). */
+:root{
+  --black:#0A0A0A; --charcoal:#161616; --silver:#C7C7C7; --silverBright:#EDEDED; --silverDim:#8A8A8A;
+  --border:#2A2A2A; --white:#FFFFFF; --pounamu:#3C6E52; --pounamuSoft:rgba(60,110,82,.18); --pounamuLine:rgba(60,110,82,.55);
+  --green:#1DA462; --amber:#E8A710; --red:#E31010;
+  --display:"Montserrat",system-ui,sans-serif; --body:"Poppins",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--silverBright);font-family:var(--body);font-size:15px;line-height:1.55;margin:0;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--black)}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{position:relative;padding-block:96px;border-top:1px solid var(--border);overflow:hidden}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;color:var(--white)}
+h2{font-size:clamp(30px,4.4vw,52px);font-weight:800;line-height:1.05;letter-spacing:-.02em;max-width:18ch}
+h3{font-size:19px;font-weight:700;line-height:1.2}
+p{margin:0}
+.muted{color:var(--silverDim)}
+.num{font-variant-numeric:tabular-nums}
+
+/* nav */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+nav.top .wrap{display:flex;align-items:center;gap:20px;height:54px}
+nav.top .brand{font-family:var(--display);font-weight:800;letter-spacing:.18em;font-size:12px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav.top .links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+nav.top .links::-webkit-scrollbar{display:none}
+nav.top .links a{font-size:12px;text-decoration:none;color:var(--silverDim);padding:6px 10px;border-radius:999px;white-space:nowrap;transition:.2s}
+nav.top .links a:hover,nav.top .links a.on{color:var(--white);background:var(--pounamuSoft)}
+
+/* section tag */
+.tag{display:inline-flex;align-items:center;gap:8px;background:var(--charcoal);border:1px solid var(--silver);padding:6px 12px;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silverBright);margin-bottom:22px}
+.tag svg{width:14px;height:14px}
+.lead{font-size:17px;color:var(--silver);max-width:60ch;margin-top:16px}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px}
+
+/* koru watermark */
+.koru-bg{position:absolute;pointer-events:none;opacity:.07}
+.koru-bg path{stroke:var(--pounamu)}
+
+/* cover */
+.cover{border-top:0;padding-block:72px 88px}
+.cover .eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--silverDim)}
+.cover h1{font-size:clamp(40px,7.4vw,92px);font-weight:900;line-height:.95;letter-spacing:-.035em;margin-top:20px;max-width:13ch}
+.cover h1 em{font-style:normal;color:var(--pounamu);-webkit-text-stroke:0}
+.cover .sub{font-size:18px;color:var(--silver);max-width:52ch;margin-top:26px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-top:56px}
+.stat{background:var(--black);padding:22px 20px}
+.stat b{display:block;font-family:var(--display);font-size:clamp(28px,3.6vw,44px);font-weight:800;color:var(--white);letter-spacing:-.02em;line-height:1}
+.stat span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--silverDim);margin-top:10px}
+.stat.hl b{color:var(--pounamu)}
+
+/* bar chart */
+.chart{background:var(--charcoal);border:1px solid var(--border);padding:28px}
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr) 64px;gap:14px;align-items:center;font-size:12.5px}
+.bar .l{color:var(--silver);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .t{height:16px;background:rgba(255,255,255,.04);position:relative}
+.bar .f{position:absolute;inset:0 auto 0 0;background:var(--silverDim);width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.bar.top .f{background:var(--pounamu)}
+.bar.top .l{color:var(--white);font-weight:600}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--silverBright);font-weight:600}
+.callout{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin-top:26px;padding-top:22px;border-top:1px solid var(--border)}
+.callout b{font-family:var(--display);font-size:64px;font-weight:900;color:var(--pounamu);line-height:1;letter-spacing:-.03em}
+
+.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:start}
+.list{display:flex;flex-direction:column;gap:12px;list-style:none;padding:0;margin:0}
+.list li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:14.5px;color:var(--silver)}
+.list li svg{width:18px;height:18px;margin-top:3px}
+.list li b{color:var(--white);font-weight:600}
+.pillrow{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.p-red{background:rgba(227,16,16,.15);color:var(--red)}
+.p-amber{background:rgba(232,167,16,.15);color:var(--amber)}
+.p-green{background:rgba(29,164,98,.15);color:var(--green)}
+.p-jade{background:var(--pounamuSoft);color:#8FC3A5}
+.p-grey{background:rgba(199,199,199,.1);color:var(--silver)}
+.box{background:var(--charcoal);border:1px solid var(--border);padding:24px}
+.box.line{border-top:2px solid var(--pounamu)}
+.label{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--silverDim);font-weight:600}
+
+/* followers log chart */
+.logchart{position:relative;padding-top:8px}
+.lrow{display:grid;grid-template-columns:150px minmax(0,1fr) 70px;gap:14px;align-items:center;margin-bottom:12px;font-size:13px}
+.lrow .t{height:26px;position:relative}
+.lrow .f{position:absolute;inset:0 auto 0 0;background:var(--silverDim);width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.lrow.me .f{background:var(--pounamu)}
+.lrow .v{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
+.ticks{display:grid;grid-template-columns:150px minmax(0,1fr) 70px;gap:14px;font-size:10.5px;color:var(--silverDim)}
+.ticks .s{position:relative;height:16px;border-top:1px solid var(--border)}
+.ticks .s i{position:absolute;top:4px;font-style:normal;transform:translateX(-50%)}
+
+/* bench cards (horizontal scroll) */
+.hscroll{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(290px,1fr);gap:16px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory}
+.hscroll::-webkit-scrollbar{height:6px}.hscroll::-webkit-scrollbar-thumb{background:var(--border)}
+.bench{scroll-snap-align:start;background:var(--charcoal);border:1px solid var(--border);padding:24px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.bench .who{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.bench .who a{font-family:var(--display);font-weight:700;font-size:16px;text-decoration:none;color:var(--white)}
+.bench .who a:hover{color:#8FC3A5}
+.bench .fol{font-family:var(--display);font-weight:800;font-size:22px;color:var(--silverBright)}
+.bench .hit{border-left:2px solid var(--pounamu);padding-left:14px}
+.bench .hit b{font-family:var(--display);font-size:34px;font-weight:900;color:var(--white);display:block;line-height:1.05;letter-spacing:-.02em}
+.bench .hit small{font-size:12.5px;color:var(--silver);display:block;margin-top:6px}
+.bench .steal{font-size:13.5px;color:var(--silver);margin-top:auto;padding-top:14px;border-top:1px dashed var(--border)}
+.bench .steal span{color:#8FC3A5;font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px}
+
+/* positioning */
+.thesis{font-family:var(--display);font-size:clamp(26px,3.8vw,46px);font-weight:800;line-height:1.1;letter-spacing:-.02em;color:var(--white);max-width:22ch}
+.thesis em{font-style:normal;color:var(--pounamu)}
+.venn{width:100%;max-width:440px;margin:0 auto;display:block}
+.venn text{font-family:var(--display);font-weight:700;fill:var(--white)}
+.profile{background:var(--charcoal);border:1px solid var(--border);padding:24px;max-width:460px}
+.toggle{display:inline-flex;border:1px solid var(--border);border-radius:999px;padding:3px;margin-bottom:18px}
+.toggle button{all:unset;cursor:pointer;font-size:12px;font-weight:600;padding:6px 16px;border-radius:999px;color:var(--silverDim)}
+.toggle button.on{background:var(--pounamu);color:var(--white)}
+.toggle button:focus-visible{outline:2px solid var(--silver)}
+.prof-h{display:flex;gap:16px;align-items:center}
+.avatar{width:64px;height:64px;border-radius:50%;border:2px solid var(--pounamu);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--black);flex:none}
+.prof-name{font-weight:600;color:var(--white)}
+.prof-cat{font-size:12px;color:var(--silverDim)}
+.prof-bio{margin-top:14px;font-size:14px;color:var(--silverBright);white-space:pre-line;min-height:110px}
+.prof-hl{display:flex;gap:12px;margin-top:16px;overflow-x:auto}
+.prof-hl div{flex:none;text-align:center;font-size:11px;color:var(--silver);width:62px}
+.prof-hl div i{display:block;width:52px;height:52px;margin:0 auto 6px;border-radius:50%;border:1px solid var(--border);background:var(--black);display:grid;place-items:center;font-style:normal;font-family:var(--display);font-weight:800;color:var(--pounamu)}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:40px;position:relative}
+.step{padding:22px 20px 22px 0;border-top:2px solid var(--border);position:relative}
+.step::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--black);border:2px solid var(--silverDim)}
+.step.go{border-top-color:var(--pounamu)}
+.step.go::before{border-color:var(--pounamu);background:var(--pounamu)}
+.step .label{display:block;margin:10px 0 6px}
+.step h3{font-size:22px}
+.step p{font-size:13.5px;color:var(--silver);margin-top:8px;max-width:28ch}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.pillar{background:var(--charcoal);border:1px solid var(--border);border-top:2px solid var(--silver);padding:22px;grid-column:span 2;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pillar.big{grid-column:span 3;border-top-color:var(--pounamu)}
+.pillar .pct{font-family:var(--display);font-weight:900;font-size:40px;line-height:1;color:var(--white)}
+.pillar.big .pct{color:var(--pounamu)}
+.pillar p{font-size:13.5px;color:var(--silver)}
+.pillar .ex{font-size:12.5px;color:var(--silverDim);border-top:1px solid var(--border);padding-top:10px;margin-top:auto}
+
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:10px;align-items:center}
+.fl{display:grid;grid-template-columns:120px 1fr auto;gap:20px;align-items:center;padding:22px 26px;background:var(--charcoal);border:1px solid var(--border);min-width:0}
+.fl:nth-child(1){width:100%;border-left:3px solid var(--pounamu)}
+.fl:nth-child(2){width:86%;border-left:3px solid var(--silver)}
+.fl:nth-child(3){width:72%;border-left:3px solid var(--silverDim)}
+.fl h3{font-size:24px}
+.fl p{font-size:13.5px;color:var(--silver)}
+.fl .share{font-family:var(--display);font-weight:900;font-size:30px;color:var(--white)}
+
+/* series */
+.series{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.serie{border:1px solid var(--border);padding:22px;display:flex;flex-direction:column;gap:10px;background:var(--black);transition:border-color .2s,transform .2s}
+.serie:hover{border-color:var(--pounamu);transform:translateY(-3px)}
+.serie .freq{font-size:11px;color:#8FC3A5;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.serie h3{font-size:20px}
+.serie p{font-size:13.5px;color:var(--silver)}
+.serie .src{font-size:11.5px;color:var(--silverDim);margin-top:auto}
+
+/* week */
+.weekgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.day{border:1px solid var(--border);padding:14px 12px;min-height:150px;display:flex;flex-direction:column;gap:8px;background:var(--black);min-width:0}
+.day .dn{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--silverDim);font-weight:600}
+.day.post{background:var(--charcoal);border-color:var(--pounamuLine)}
+.day .fmt{font-family:var(--display);font-weight:800;font-size:17px;color:var(--white)}
+.day small{font-size:12px;color:var(--silver);line-height:1.4}
+.day .st{font-size:11.5px;color:var(--silverDim);margin-top:auto}
+
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:22px}
+.wk{display:flex;flex-direction:column;gap:10px;min-width:0}
+.wk .label{padding-bottom:6px;border-bottom:1px solid var(--border)}
+.slot{background:var(--charcoal);border:1px solid var(--border);padding:14px;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:border-color .2s}
+.slot:hover,.slot:focus-visible{border-color:var(--pounamu);outline:none}
+.slot .d{font-size:11px;color:var(--silverDim);display:flex;justify-content:space-between;gap:6px}
+.slot b{font-size:13.5px;font-weight:600;color:var(--white);line-height:1.35}
+
+/* ideas */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.filters button{all:unset;cursor:pointer;font-size:12.5px;font-weight:500;padding:8px 16px;border:1px solid var(--border);border-radius:999px;color:var(--silver);transition:.2s}
+.filters button.on{background:var(--white);color:var(--black);border-color:var(--white)}
+.filters button:focus-visible{outline:2px solid var(--pounamu)}
+.filters .sep{width:1px;background:var(--border);margin:0 6px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.idea{background:var(--charcoal);border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0;transition:border-color .2s}
+.idea:hover{border-color:var(--pounamuLine)}
+.idea .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.idea .n{font-family:var(--display);font-weight:800;color:var(--silverDim);font-size:13px}
+.idea h3{font-size:16.5px}
+.idea .hook{font-size:13.5px;color:var(--silverBright);border-left:2px solid var(--pounamu);padding-left:12px;font-style:italic}
+.idea .meta{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--silverDim);margin-top:auto;padding-top:10px;border-top:1px solid var(--border)}
+.idea .meta b{color:var(--silver);font-weight:500}
+.idea.flash{border-color:var(--pounamu);box-shadow:0 0 0 1px var(--pounamu)}
+
+/* hypotheses */
+.tbl{overflow-x:auto;border:1px solid var(--border)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:13.5px}
+th{background:var(--charcoal);color:var(--silverBright);text-transform:uppercase;font-size:10.5px;letter-spacing:.14em;text-align:left;padding:14px 16px;font-weight:600}
+td{padding:16px;border-top:1px solid var(--border);vertical-align:top;color:var(--silver)}
+td:first-child{color:var(--white);font-weight:500}
+tr:nth-child(even) td{background:rgba(22,22,22,.5)}
+td .ev{display:block;font-size:12px;color:var(--silverDim);margin-top:4px;font-weight:400}
+
+/* kpi + projection */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:40px}
+.calc{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.calc-chart{padding:22px 18px 12px}
+.calc-chart svg{width:100%;height:auto;display:block;touch-action:none;user-select:none}
+.calc-chart text{font-family:var(--body);font-size:12px;fill:var(--silverDim)}
+.calc-chart .tip{font-family:var(--display);font-weight:800;font-size:15px;fill:var(--white)}
+.calc-legend{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--silver);margin:0 0 10px 8px}
+.calc-legend i{display:inline-block;width:18px;height:0;border-top:2px dashed var(--silverDim);vertical-align:middle;margin-right:6px}
+.calc-legend i.lg-paid{border-top:3px solid var(--pounamu)}
+#dragPt{cursor:grab;outline:none}
+#dragPt:active{cursor:grabbing}
+#dragPt:focus-visible .ring{stroke:var(--white)}
+.halo{animation:pulse 2.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(2.4);opacity:0}}
+.calc-side{display:flex;flex-direction:column;gap:18px;background:var(--charcoal);border:1px solid var(--border);border-top:2px solid var(--pounamu);padding:24px;min-width:0}
+.calc-out{display:flex;flex-direction:column;gap:4px}
+.calc-meta{font-family:var(--display);font-weight:900;font-size:clamp(40px,5vw,56px);color:var(--white);line-height:1;letter-spacing:-.03em}
+.calc-split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.calc-split div{background:var(--charcoal);padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.calc-split b{font-family:var(--display);font-size:22px;font-weight:800;color:var(--silverBright)}
+.calc-split div:last-child b{color:#8FC3A5}
+.calc-invest{display:flex;flex-direction:column;gap:6px;padding:16px 0;border-block:1px solid var(--border)}
+.calc-invest > b{font-family:var(--display);font-weight:900;font-size:36px;color:var(--pounamu);line-height:1.05;letter-spacing:-.02em}
+.calc-row{display:flex;justify-content:space-between;font-size:13.5px;color:var(--silver)}
+.calc-row b{color:var(--white);font-weight:600}
+.scen{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.scen button{all:unset;cursor:pointer;text-align:center;font-size:12px;font-weight:600;padding:8px 4px;border:1px solid var(--border);color:var(--silver);display:flex;flex-direction:column;gap:2px;transition:.2s}
+.scen button small{font-size:11px;font-weight:400;color:var(--silverDim)}
+.scen button.on{border-color:var(--pounamu);background:var(--pounamuSoft);color:var(--white)}
+.scen button:focus-visible{outline:2px solid var(--silver)}
+.cpf-row{display:flex;align-items:center;gap:12px;margin-top:12px}
+.cpf-row input{flex:1;accent-color:#3C6E52;min-width:0}
+.cpf-row b{font-size:14px;color:var(--white);min-width:62px;text-align:right}
+.calc-note{font-size:12px;margin-top:14px;max-width:90ch}
+.kpi{background:var(--charcoal);border:1px solid var(--border);border-top:2px solid var(--silver);padding:20px}
+.kpi b{font-family:var(--display);font-size:30px;font-weight:800;color:var(--white);display:block;margin-top:6px;line-height:1.1}
+.kpi p{font-size:12.5px;color:var(--silverDim);margin-top:6px}
+.proj svg{width:100%;height:auto;display:block}
+.proj text{font-family:var(--body);font-size:11px;fill:var(--silverDim)}
+.proj .big{font-family:var(--display);font-weight:800;font-size:15px;fill:var(--white)}
+
+/* risks */
+.risks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.risk{border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:10px}
+.risk h3{font-size:16px}
+.risk p{font-size:13.5px;color:var(--silver)}
+.risk .fix{font-size:12.5px;color:#8FC3A5}
+
+/* steps */
+.next{display:flex;flex-direction:column;gap:0;counter-reset:s}
+.nx{display:grid;grid-template-columns:70px 1fr auto;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--border)}
+.nx .i{font-family:var(--display);font-weight:900;font-size:36px;color:var(--pounamu);line-height:1}
+.nx h3{font-size:17px}
+.nx p{font-size:13.5px;color:var(--silverDim);margin-top:4px}
+
+footer{border-top:1px solid var(--border);padding-block:28px;font-size:11px;color:var(--silverDim)}
+.foot-brand{display:inline-flex;align-items:center;gap:10px}
+nav.top .brand img{display:block;height:24px;width:auto}
+.cover-logo{height:44px;width:auto;display:block;margin-bottom:36px}
+.cover-mark{position:absolute;right:-60px;top:-40px;height:640px;width:auto;opacity:.09;pointer-events:none}
+
+/* prints */
+.zoom{all:unset;cursor:zoom-in;display:block;line-height:0;border:1px solid var(--border);overflow:hidden;transition:border-color .2s}
+.zoom:hover,.zoom:focus-visible{border-color:var(--pounamu)}
+.zoom img{width:100%;height:auto;display:block;transition:transform .4s}
+.zoom:hover img{transform:scale(1.02)}
+.viral{margin:24px 0 0;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:end}
+.viral figcaption{display:flex;flex-direction:column;gap:8px}
+.viral figcaption b{font-family:var(--display);font-size:20px;color:var(--white);line-height:1.2}
+.viral figcaption a,.ref a.go{font-size:12.5px;color:#8FC3A5;text-decoration:none}
+.viral figcaption a:hover,.ref a.go:hover{text-decoration:underline}
+
+.refs{display:flex;flex-direction:column;gap:56px}
+.ref{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:32px;align-items:start}
+.ref-info{display:flex;flex-direction:column;gap:14px;position:sticky;top:80px}
+.ref-info .who{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ref-info .who a{font-family:var(--display);font-weight:800;font-size:22px;text-decoration:none;color:var(--white)}
+.ref-info .who a:hover{color:#8FC3A5}
+.ref-info .fol{font-size:12px;color:var(--silverDim);letter-spacing:.12em;text-transform:uppercase}
+.ref-info .steal{font-size:14px;color:var(--silver);border-left:2px solid var(--pounamu);padding-left:14px}
+.ref-info .steal span{color:#8FC3A5;font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.shot{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.shot figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.shot .big{font-family:var(--display);font-weight:900;font-size:26px;color:var(--white);letter-spacing:-.02em;line-height:1}
+.shot .what{font-size:12.5px;color:var(--silver);flex-basis:100%}
+
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(10,10,10,.94);display:grid;place-items:center;padding:calc(24px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));cursor:zoom-out}
+.lightbox img{max-width:min(1100px,100%);max-height:100%;width:auto;height:auto;border:1px solid var(--border)}
+.lb-close{all:unset;cursor:pointer;position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:max(18px,env(safe-area-inset-right,0px));font-size:34px;line-height:1;color:var(--white)}
+@media (max-width:900px){.ref{grid-template-columns:1fr}.ref-info{position:static}.viral{grid-template-columns:1fr}.cover-mark{height:420px;right:-120px}}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:900px){
+  .grid2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ladder{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px}
+  .pillars{grid-template-columns:1fr 1fr}
+  .pillar,.pillar.big{grid-column:span 1}
+  .pillar.big:first-child{grid-column:span 2}
+  .weekgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .day{min-height:auto}
+  .cal{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpis{grid-template-columns:1fr 1fr}
+  .calc{grid-template-columns:1fr}
+  .fl{grid-template-columns:1fr auto;width:100%!important}
+  .fl .lbl{grid-column:1/-1}
+}
+@media (max-width:560px){
+  section{padding-block:64px}
+  .bar{grid-template-columns:minmax(0,1fr) 56px;row-gap:4px}
+  .bar .l{grid-column:1/-1}
+  .lrow,.ticks{grid-template-columns:90px minmax(0,1fr) 54px;gap:8px}
+  .ladder,.cal,.kpis,.pillars{grid-template-columns:1fr}
+  .pillar.big:first-child{grid-column:span 1}
+  .nx{grid-template-columns:48px 1fr}
+  .nx .pill{grid-column:2}
+  .callout{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <a class="brand" href="#capa" aria-label="Puna"><img src="paloma-assets/full.png" alt="Puna" height="24"></a>
+  <div class="links" id="navlinks">
+    <a href="#raiox">Raio-X</a><a href="#referencias">Referências</a><a href="#posicionamento">Posicionamento</a><a href="#pilares">Pilares</a><a href="#series">Séries</a><a href="#semana">Semana</a><a href="#ideias">30 ideias</a><a href="#hipoteses">Hipóteses</a><a href="#metas">Metas</a><a href="#proximos">Próximos passos</a>
+  </div>
+</div></nav>
+
+<!-- CAPA -->
+<section class="cover" id="capa">
+  <img class="cover-mark" src="paloma-assets/mark.png" alt="" aria-hidden="true">
+  <div class="wrap" style="position:relative">
+    <img src="paloma-assets/full.png" alt="Puna" class="cover-logo">
+    <div class="eyebrow">Estratégia de Growth · Instagram · Nov/2026 → Abr/2027</div>
+    <h1>De CEO de consórcio a <em>referência</em> em liderança e vendas.</h1>
+    <p class="sub">Plano para transformar o @palomaconsorcios no perfil que, em 6 meses, abre a mentoria da Paloma para donos de empresa.</p>
+    <div class="stats">
+      <div class="stat hl"><b class="num" data-count="40" data-pre="R$" data-suf="mi">R$40mi</b><span>vendidos por ano na FR</span></div>
+      <div class="stat"><b class="num" data-count="2327" data-sep="1">2.327</b><span>seguidores hoje</span></div>
+      <div class="stat"><b class="num" data-count="3" data-suf="/sem">3/sem</b><span>2 reels + 1 carrossel</span></div>
+      <div class="stat"><b class="num" data-count="15" data-suf="mil">15mil</b><span>meta de seguidores em 6 meses</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RAIO-X -->
+<section id="raiox">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>01 · Raio-X do perfil</div>
+    <div class="head">
+      <div><h2>O único post que explodiu não falava de consórcio.</h2>
+      <p class="lead">Curtidas dos últimos 11 posts do @palomaconsorcios. O reel de humor sobre "trabalhar comigo" bateu todo o resto somado, e por muito.</p></div>
+    </div>
+    <div class="grid2">
+      <div class="chart">
+        <div class="bars" id="palomaBars"></div>
+        <figure class="viral"><button type="button" class="zoom" data-src="paloma-assets/paloma-viral.jpg" aria-label="Ampliar print do reel viral da Paloma"><img src="paloma-assets/paloma-viral.jpg" alt="Print do reel da Paloma: 'Ah, queria muito trabalhar com você!' com 8,2 mil curtidas e 1,2 mil reposts" loading="lazy"></button><figcaption><span class="label">O post que explodiu</span><b>8,2 mil curtidas · 1,2 mil reposts</b><a href="https://www.instagram.com/p/DagpakgRB5q/" target="_blank" rel="noopener">Abrir no Instagram ↗</a></figcaption></figure>
+        <div class="callout"><b class="num">157×</b><p class="muted">mais curtidas que a média dos outros posts (≈52). O público já disse o que quer ver: <b style="color:var(--white)">a Paloma chefe</b>, não a Paloma vendedora de carta.</p></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="box line">
+          <div class="label" style="margin-bottom:14px">O que trava o crescimento</div>
+          <ul class="list">
+            <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--red)"/></svg><span><b>Bio fala com o cliente de consórcio</b>, não com o dono de empresa que vai comprar mentoria.</span></li>
+            <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--red)"/></svg><span><b>Pauta de economia/política</b> rende 8 a 31 curtidas e afasta parte do público.</span></li>
+            <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--amber)"/></svg><span><b>Prova forte, mal contada:</b> R$8,5mi em setembro virou foto de almoço.</span></li>
+            <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--amber)"/></svg><span><b>Sem série nem CTA</b>: ninguém sabe por que seguir.</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <div class="label" style="margin-bottom:14px">O que já temos de ouro</div>
+          <div class="pillrow">
+            <span class="pill p-jade">Almoço do Milhão</span><span class="pill p-jade">Time de vendas</span><span class="pill p-jade">FR · 2 anos</span><span class="pill p-jade">Ranking HS</span><span class="pill p-jade">Encontro de Centuriões</span><span class="pill p-jade">+8 anos de mercado</span><span class="pill p-jade">Humor que viraliza</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERÊNCIAS -->
+<section id="referencias">
+  <svg class="koru-bg" style="left:-160px;bottom:-200px;width:520px;height:520px" viewBox="0 0 100 100"><path class="koru-path" data-turns="3" fill="none" stroke-width=".4"/></svg>
+  <div class="wrap" style="position:relative">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>02 · Raspagem das referências</div>
+    <div class="head"><div><h2>O que os grandes fazem e a Paloma ainda não.</h2>
+      <p class="lead">Seguidores em escala logarítmica. Abaixo, o post campeão de cada um e o que vamos roubar.</p></div></div>
+
+    <div class="chart" style="margin-bottom:28px">
+      <div class="logchart" id="logchart"></div>
+    </div>
+
+    <div class="refs" id="refs"></div>
+    <p class="muted" style="font-size:12px;margin-top:18px">Prints e números dos posts originais, coletados em 03/11/2026. Toque no print para ampliar ou abra o post no Instagram.</p>
+  </div>
+</section>
+
+<!-- POSICIONAMENTO -->
+<section id="posicionamento">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>03 · Posicionamento</div>
+    <div class="grid2" style="align-items:center">
+      <div>
+        <p class="thesis">A empresa de consórcio é o <em>laboratório</em>. O produto é o jeito Paloma de liderar, gerir e vender.</p>
+        <p class="lead">Ela não ensina consórcio. Ela mostra, com números reais, como montou um time que vende R$40 milhões por ano.</p>
+      </div>
+      <svg class="venn" viewBox="0 0 400 360" role="img" aria-label="Liderança, Gestão e Comercial se cruzam no Método Paloma">
+        <circle cx="140" cy="135" r="105" fill="rgba(60,110,82,.16)" stroke="var(--pounamu)" stroke-width="1.5"/>
+        <circle cx="260" cy="135" r="105" fill="rgba(199,199,199,.06)" stroke="var(--silver)" stroke-width="1.5"/>
+        <circle cx="200" cy="235" r="105" fill="rgba(199,199,199,.04)" stroke="var(--silverDim)" stroke-width="1.5"/>
+        <text x="95" y="110" font-size="17" text-anchor="middle">Liderança</text>
+        <text x="305" y="110" font-size="17" text-anchor="middle">Comercial</text>
+        <text x="200" y="300" font-size="17" text-anchor="middle">Gestão</text>
+        <text x="200" y="168" font-size="12" text-anchor="middle" style="fill:var(--silverBright)">MÉTODO</text>
+        <text x="200" y="186" font-size="12" text-anchor="middle" style="fill:var(--silverBright)">PALOMA</text>
+      </svg>
+    </div>
+
+    <div class="grid2" style="margin-top:56px">
+      <div>
+        <div class="label" style="margin-bottom:14px">Perfil: hoje × proposto</div>
+        <div class="profile">
+          <div class="toggle" role="tablist"><button id="bioOld" class="on" type="button">Hoje</button><button id="bioNew" type="button">Proposto</button></div>
+          <div class="prof-h"><div class="avatar">PF</div><div><div class="prof-name" id="pName">Paloma Ferreira / FR CONSÓRCIOS</div><div class="prof-cat" id="pCat">Empreendedor</div></div></div>
+          <div class="prof-bio" id="pBio"></div>
+          <div class="prof-hl" id="pHl"></div>
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:14px">Por que mudar</div>
+        <ul class="list">
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>Nome pesquisável:</b> "Liderança & Vendas" aparece na busca do Instagram; "FR Consórcios" não atrai empresário.</span></li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>Número na bio:</b> R$40mi/ano é a prova que segura o seguidor nos 3 segundos do perfil.</span></li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>Link vira lista:</b> a lista de espera da mentoria nasce no 1º mês, mesmo antes do produto.</span></li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>Consórcio continua:</b> fica no destaque "FR" e no @frconsorcios1. Ninguém perde venda.</span></li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>3 fixados:</b> reel viral do time · história da FR · Almoço do Milhão.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="label" style="margin-top:64px">Escada até a mentoria</div>
+    <div class="ladder">
+      <div class="step go"><span class="label">Mês 1–2</span><h3>Atrair</h3><p>Reels de humor e opinião de líder. Meta: alcance fora da base.</p></div>
+      <div class="step go"><span class="label">Mês 3–4</span><h3>Provar</h3><p>Método FR em carrossel + números reais. Meta: salvamentos e DMs.</p></div>
+      <div class="step"><span class="label">Mês 5</span><h3>Aquecer</h3><p>Lista de espera, diagnósticos ao vivo, collabs com empresários.</p></div>
+      <div class="step"><span class="label">Mês 6</span><h3>Abrir</h3><p>Turma piloto de mentoria para donos de empresa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PILARES + FUNIL -->
+<section id="pilares">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>04 · Pilares e funil</div>
+    <div class="head"><div><h2>5 pilares, um objetivo: virar a chefe que todo mundo queria ter.</h2></div></div>
+    <div class="pillars">
+      <div class="pillar big"><span class="label">Autoridade · bastidores</span><span class="pct">30%</span><h3>A CEO por dentro</h3><p>Rotina, decisões, conversas difíceis. Gera identificação e alcance.</p><span class="ex">Ex.: "Coisas que eu não tolero no meu time"</span></div>
+      <div class="pillar big"><span class="label">Educação · método</span><span class="pct">25%</span><h3>O jeito FR de vender</h3><p>Rituais, metas, scripts, comissão. Gera salvamento e lista.</p><span class="ex">Ex.: "O ritual de segunda que faz o time vender R$8,5mi"</span></div>
+      <div class="pillar"><span class="label">Prova</span><span class="pct">20%</span><h3>Números e gente</h3><p>Almoço do Milhão, ranking, time crescendo.</p><span class="ex">Ex.: "Meu time fala de mim"</span></div>
+      <div class="pillar"><span class="label">Comunidade</span><span class="pct">15%</span><h3>Opinião e humor</h3><p>Polêmica de gestão, POV de chefe, resposta a comentário.</p><span class="ex">Ex.: "Demitiria meu melhor vendedor?"</span></div>
+      <div class="pillar"><span class="label">Conversão</span><span class="pct">10%</span><h3>Próximo passo</h3><p>Lista de espera e consórcio como alavanca do empresário.</p><span class="ex">Ex.: "Diagnóstico ao vivo do seu comercial"</span></div>
+    </div>
+
+    <div class="funnel" style="margin-top:56px">
+      <div class="fl"><div class="lbl"><span class="label">Topo</span><h3>Ser vista</h3></div><p>Reels de humor, POV e opinião forte. Objetivo: seguidores novos e compartilhamentos.</p><span class="share">60%</span></div>
+      <div class="fl"><div class="lbl"><span class="label">Meio</span><h3>Ser salva</h3></div><p>Carrosséis de método com CTA "comenta e recebe". Objetivo: salvamento e DM.</p><span class="share">25%</span></div>
+      <div class="fl"><div class="lbl"><span class="label">Fundo</span><h3>Ser escolhida</h3></div><p>Prova e convite. Objetivo: lista de espera da mentoria.</p><span class="share">15%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SÉRIES -->
+<section id="series">
+  <svg class="koru-bg" style="right:-140px;top:40px;width:480px;height:480px" viewBox="0 0 100 100"><path class="koru-path" data-turns="2.8" fill="none" stroke-width=".4"/></svg>
+  <div class="wrap" style="position:relative">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>05 · Séries-assinatura</div>
+    <div class="head"><div><h2>Formatos fixos que o seguidor reconhece em 1 segundo.</h2></div></div>
+    <div class="series">
+      <div class="serie"><span class="freq">Semanal · Reel</span><h3>"Trabalhar comigo é…"</h3><p>POV e humor de chefe. Continuação direta do reel de 8 mil curtidas.</p><span class="src">Base: reel viral da própria Paloma</span></div>
+      <div class="serie"><span class="freq">Semanal · Carrossel</span><h3>Método FR</h3><p>1 ferramenta de gestão ou venda por semana, com "comenta MÉTODO".</p><span class="src">Base: Tamis (comment-to-DM)</span></div>
+      <div class="serie"><span class="freq">Mensal · Reel</span><h3>Almoço do Milhão</h3><p>Bastidor do fechamento do mês com o número na tela.</p><span class="src">Base: Márcia (ranking como prova)</span></div>
+      <div class="serie"><span class="freq">Quinzenal · Reel</span><h3>A conta da CEO</h3><p>Quanto custa um vendedor ruim, uma rotatividade, um cliente perdido.</p><span class="src">Base: Fernando (cálculo na tela)</span></div>
+      <div class="serie"><span class="freq">Mensal · Reel</span><h3>Mesa de CEO</h3><p>Corte de conversa com outro empresário. Collab no post.</p><span class="src">Base: Mônica + Alfredo Soares</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEMANA -->
+<section id="semana">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>06 · Semana-tipo</div>
+    <div class="head"><div><h2>2 reels + 1 carrossel, com o Stories da Paloma segurando o resto.</h2></div></div>
+    <div class="weekgrid">
+      <div class="day post"><span class="dn">Seg</span><span class="fmt">Reel</span><small>Topo · humor ou opinião de líder</small><span class="pill p-jade" style="align-self:flex-start">Alcance</span></div>
+      <div class="day"><span class="dn">Ter</span><small class="st">Stories: bastidor do time</small></div>
+      <div class="day post"><span class="dn">Qua</span><span class="fmt">Carrossel</span><small>Meio · Método FR + "comenta a palavra"</small><span class="pill p-grey" style="align-self:flex-start">Salvamento</span></div>
+      <div class="day"><span class="dn">Qui</span><small class="st">Stories: caixinha de perguntas</small></div>
+      <div class="day post"><span class="dn">Sex</span><span class="fmt">Reel</span><small>Prova · números, time, conta da CEO</small><span class="pill p-green" style="align-self:flex-start">Autoridade</span></div>
+      <div class="day"><span class="dn">Sáb</span><small class="st">Stories: vida pessoal / mãe</small></div>
+      <div class="day"><span class="dn">Dom</span><small class="st">Stories: resposta da caixinha</small></div>
+    </div>
+
+    <div class="label" style="margin-top:56px">Primeiro mês · toque num post para ver a ideia completa</div>
+    <div class="cal" id="cal"></div>
+  </div>
+</section>
+
+<!-- IDEIAS -->
+<section id="ideias">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>07 · Banco de ideias</div>
+    <div class="head"><div><h2>30 pautas prontas para gravar.</h2><p class="lead">Cada uma com gancho, formato, CTA e de onde veio a inspiração.</p></div></div>
+    <div class="filters" id="filters">
+      <button type="button" class="on" data-f="all">Todas</button>
+      <button type="button" data-f="Topo">Topo</button><button type="button" data-f="Meio">Meio</button><button type="button" data-f="Fundo">Fundo</button>
+      <span class="sep"></span>
+      <button type="button" data-f="Reel">Reels</button><button type="button" data-f="Carrossel">Carrosséis</button>
+    </div>
+    <div class="ideas" id="ideas"></div>
+  </div>
+</section>
+
+<!-- HIPÓTESES -->
+<section id="hipoteses">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>08 · Hipóteses de crescimento</div>
+    <div class="head"><div><h2>O que vamos testar primeiro.</h2></div></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Hipótese</th><th>Impacto</th><th>Dificuldade</th><th>Prioridade</th></tr></thead>
+      <tbody>
+        <tr><td>Humor de liderança (POV de chefe) traz 10× mais alcance que pauta de mercado<span class="ev">Evidência: 8.151 vs média de 52 curtidas no próprio perfil</span></td><td><span class="pill p-green">Alto</span></td><td><span class="pill p-green">Baixa</span></td><td><span class="pill p-green">P1</span></td></tr>
+        <tr><td>"Comenta a palavra e recebe no direct" multiplica comentários e gera lista<span class="ev">Evidência: Tamis com 1,7 mil comentários num reel</span></td><td><span class="pill p-green">Alto</span></td><td><span class="pill p-green">Baixa</span></td><td><span class="pill p-green">P1</span></td></tr>
+        <tr><td>Mostrar número real (R$8,5mi/mês) aumenta salvamento e autoridade<span class="ev">Evidência: Márcia e Fernando usam número como gancho</span></td><td><span class="pill p-amber">Médio</span></td><td><span class="pill p-green">Baixa</span></td><td><span class="pill p-green">P1</span></td></tr>
+        <tr><td>Sair de economia/política melhora a média de alcance<span class="ev">Evidência: 8 e 31 curtidas nesses posts</span></td><td><span class="pill p-amber">Médio</span></td><td><span class="pill p-green">Baixa</span></td><td><span class="pill p-green">P1</span></td></tr>
+        <tr><td>Collab mensal com outro empresário acelera seguidores<span class="ev">Evidência: corte da Mônica no perfil do Alfredo, 3.156 curtidas</span></td><td><span class="pill p-green">Alto</span></td><td><span class="pill p-amber">Média</span></td><td><span class="pill p-amber">P2</span></td></tr>
+        <tr><td>Série fixa ("Trabalhar comigo é…") cria hábito de retorno<span class="ev">Evidência: séries diárias da Tamis</span></td><td><span class="pill p-amber">Médio</span></td><td><span class="pill p-amber">Média</span></td><td><span class="pill p-amber">P2</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- METAS -->
+<section id="metas">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>09 · Calculadora de crescimento</div>
+    <div class="head"><div><h2>Arraste a meta. Veja quanto investir.</h2>
+      <p class="lead">O conteúdo traz o crescimento orgânico. O tráfego pago impulsiona os melhores reels para donos de empresa e cobre a diferença até a meta.</p></div></div>
+
+    <div class="calc">
+      <div class="chart calc-chart">
+        <div class="calc-legend"><span><i class="lg-org"></i>Orgânico estimado</span><span><i class="lg-paid"></i>Com tráfego pago</span><span class="muted">Arraste o ponto ou use as setas do teclado</span></div>
+        <svg id="calcSvg" viewBox="0 0 640 340" role="application" aria-label="Gráfico de seguidores: arraste o ponto para definir a meta e o prazo"></svg>
+      </div>
+      <div class="calc-side">
+        <div class="calc-out">
+          <span class="label">Meta</span>
+          <b class="calc-meta num" id="cMeta">15 mil</b>
+          <span class="muted" id="cPrazo">seguidores em 6 meses</span>
+        </div>
+        <div class="calc-split">
+          <div><span class="label">Orgânico</span><b class="num" id="cOrg">7,5 mil</b></div>
+          <div><span class="label">Via tráfego</span><b class="num" id="cPaid">7,5 mil</b></div>
+        </div>
+        <div class="calc-invest">
+          <span class="label">Investimento em mídia</span>
+          <b class="num" id="cTotal">R$ 9.000</b>
+          <div class="calc-row"><span>por mês</span><b class="num" id="cMes">R$ 1.500</b></div>
+          <div class="calc-row"><span>por dia</span><b class="num" id="cDia">R$ 50</b></div>
+        </div>
+        <div>
+          <span class="label">Custo por seguidor</span>
+          <div class="scen" id="scen">
+            <button type="button" data-v="0.6">Otimista<small>R$ 0,60</small></button>
+            <button type="button" data-v="1.2" class="on">Realista<small>R$ 1,20</small></button>
+            <button type="button" data-v="2">Conservador<small>R$ 2,00</small></button>
+          </div>
+          <div class="cpf-row"><input type="range" id="cpf" min="0.3" max="3" step="0.05" value="1.2" aria-label="Custo por seguidor"><b class="num" id="cpfV">R$ 1,20</b></div>
+        </div>
+      </div>
+    </div>
+    <p class="muted calc-note">Custo por seguidor: estimativa de mercado para reels impulsionados com público de empresários no Brasil. Não existe índice oficial. Como referência, o CPM de Meta Ads no Brasil fica entre R$ 8 e R$ 50 (Trafius, 2026). Validamos o número real com um teste de R$ 500 nas duas primeiras semanas.</p>
+
+    <div class="kpis">
+      <div class="kpi" style="border-top-color:var(--pounamu)"><span class="label">Lista de espera</span><b>300</b><p>donos de empresa até o mês 6</p></div>
+      <div class="kpi"><span class="label">Por post</span><b>&gt;60%</b><p>do alcance vindo de não seguidores</p></div>
+      <div class="kpi"><span class="label">Carrossel</span><b>2%</b><p>de salvamentos sobre alcance</p></div>
+      <div class="kpi"><span class="label">Comment-to-DM</span><b>50+</b><p>comentários com palavra-chave por carrossel</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RISCOS -->
+<section id="riscos">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>10 · Pontos de atenção</div>
+    <div class="head"><div><h2>O que pode travar o plano.</h2></div></div>
+    <div class="risks">
+      <div class="risk"><span class="pill p-red" style="align-self:flex-start">Crítico</span><h3>Tempo de gravação</h3><p>Sem a Paloma na câmera, nada acontece.</p><span class="fix">→ 1 tarde de gravação a cada 15 dias (6 reels)</span></div>
+      <div class="risk"><span class="pill p-amber" style="align-self:flex-start">Atenção</span><h3>3 posts/semana é pouco</h3><p>As referências postam todo dia.</p><span class="fix">→ Stories diários da própria Paloma são obrigatórios</span></div>
+      <div class="risk"><span class="pill p-amber" style="align-self:flex-start">Atenção</span><h3>Exposição de números</h3><p>Nem todo dado da FR pode ir ao ar.</p><span class="fix">→ Alinhar já o que é público (faturamento, metas, time)</span></div>
+      <div class="risk"><span class="pill p-grey" style="align-self:flex-start">Monitorar</span><h3>Público misturado</h3><p>Cliente de consórcio ≠ dono de empresa.</p><span class="fix">→ Consórcio vai para o @frconsorcios1 e destaques</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÓXIMOS PASSOS -->
+<section id="proximos">
+  <svg class="koru-bg" style="left:50%;top:-80px;width:560px;height:560px" viewBox="0 0 100 100"><path class="koru-path" data-turns="3.2" fill="none" stroke-width=".35"/></svg>
+  <div class="wrap" style="position:relative">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>11 · Próximos passos</div>
+    <div class="head"><div><h2>Começa na semana que vem.</h2></div></div>
+    <div class="next">
+      <div class="nx"><span class="i">1</span><div><h3>Aprovar posicionamento e nova bio</h3><p>Nome, bio, destaques e 3 fixados.</p></div><span class="pill p-green">Esta semana</span></div>
+      <div class="nx"><span class="i">2</span><div><h3>Arquivar posts fora do tema</h3><p>Política, economia e frases soltas saem do grid.</p></div><span class="pill p-green">Esta semana</span></div>
+      <div class="nx"><span class="i">3</span><div><h3>1º dia de gravação</h3><p>6 reels do mês 1 numa tarde, no escritório da FR com o time.</p></div><span class="pill p-amber">Até 07/11</span></div>
+      <div class="nx"><span class="i">4</span><div><h3>Ativar automação de direct</h3><p>Palavra-chave no comentário entrega o material e capta o contato.</p></div><span class="pill p-amber">Até 10/11</span></div>
+      <div class="nx"><span class="i">5</span><div><h3>Lista de 5 empresários para collab</h3><p>Parceiros, fornecedores e clientes com público de donos de empresa.</p></div><span class="pill p-grey">Novembro</span></div>
+      <div class="nx"><span class="i">6</span><div><h3>Revisão de 30 dias</h3><p>Seguidores, alcance fora da base, salvamentos e lista.</p></div><span class="pill p-grey">09/12</span></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Paloma Ferreira · FR Consórcios · Nov/2026 – Abr/2027</span><span class="foot-brand"><img src="paloma-assets/full.png" alt="Puna" height="18">Estratégia de Growth</span></div></footer>
+
+<div class="lightbox" id="lightbox" hidden><button type="button" class="lb-close" aria-label="Fechar">×</button><img id="lbImg" alt=""></div>
+
+<script>
+// koru spirals (desenho próprio)
+function koruPath(turns){
+  const pts=[];const N=Math.round(turns*60);const a=1.2,b=(46-a)/(turns*2*Math.PI);
+  for(let i=0;i<=N;i++){const t=i/N*turns*2*Math.PI;const r=a+b*t;pts.push([50+r*Math.cos(t),50+r*Math.sin(t)])}
+  // fronde: segue a linha para fora
+  const last=pts[pts.length-1];pts.push([last[0],last[1]+8]);
+  return 'M'+pts.map(p=>p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' L');
+}
+document.querySelectorAll('svg.koru').forEach(s=>{
+  s.innerHTML='<path d="'+koruPath(+s.dataset.turns||2.4)+'" fill="none" stroke="var(--pounamu)" stroke-width="7" stroke-linecap="round"/>';
+});
+document.querySelectorAll('path.koru-path').forEach(p=>p.setAttribute('d',koruPath(+p.dataset.turns||3)));
+
+// Paloma bars
+const pb=[["Reel · \"Trabalhar comigo\" (humor de líder)",8151,1],["Reel · trend empreendedor",127],["Foto pessoal",88],["Almoço do Milhão · out",68],["FR 2 anos · o time",68],["Reel · ranking HS",51],["Encontro de Centuriões",47],["Almoço do Milhão · R$8,5mi set",33],["Reel · cenário político",31],["Reel · 3ª contemplação",16],["Carrossel · \"Lula venceu, e agora?\"",8]];
+const pbEl=document.getElementById('palomaBars');
+pbEl.innerHTML=pb.map(([l,v,t])=>`<div class="bar${t?' top':''}"><span class="l" title="${l.replace(/"/g,'&quot;')}">${l}</span><span class="t"><span class="f" data-w="${Math.max(v/8151*100,.8)}"></span></span><span class="v">${v.toLocaleString('pt-BR')}</span></div>`).join('');
+
+// followers log scale (1K → 1M)
+const fol=[["@palomaconsorcios",2327,1],["@mariachutti",4670],["@marciamatossz",12000],["@monicahauck",68200],["@tamis.consorcio",94000],["@fernandobatalha",920000]];
+const fmt=v=>v>=1e6?(v/1e6).toLocaleString('pt-BR')+'M':v>=1000?(v/1000).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mil':v;
+const lw=v=>(Math.log10(v)-3)/3*100;
+document.getElementById('logchart').innerHTML=fol.map(([h,v,me])=>`<div class="lrow${me?' me':''}"><span style="color:${me?'var(--white)':'var(--silver)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h}</span><span class="t"><span class="f" data-w="${lw(v)}"></span></span><span class="v">${fmt(v)}</span></div>`).join('')+
+ `<div class="ticks"><span></span><span class="s">${[[0,'1 mil'],[33.33,'10 mil'],[66.67,'100 mil'],[100,'1 mi']].map(([x,l])=>`<i style="left:${x}%">${l}</i>`).join('')}</span><span></span></div>`;
+
+// referências com prints
+const R=[
+ {u:"fernandobatalhaoficial",f:"920 mil seguidores",steal:"Um bordão próprio + conta simples na tela. Ex.: \"Quem lidera com número não lidera no grito.\"",s:[
+  ["fernando-carro","DTczGoYAu6h","311 mil","10,7 mil comentários","Reel: \"Por que comprar carro à vista?\" Ele faz a conta no quadro."],
+  ["fernando-calculos","C683lNBM12_","220 mil","5,7 mil comentários","Corte de podcast: \"Quem faz cálculos, faz consórcio\". O bordão virou marca."]]},
+ {u:"tamis.consorcio",f:"94 mil seguidores",steal:"\"Comenta a palavra e recebe no direct\" em todo carrossel de método. Gera alcance e lista para a mentoria.",s:[
+  ["tamis","DeNbhpZv4_I","8,3 mil","1,7 mil comentários","Reel: \"E se o seu consórcio virasse lucro?\" Conta no caderno + CTA de comentário."]]},
+ {u:"monicahauck",f:"68 mil seguidores",steal:"Frase curta de liderança, opinião com \"concorda ou discorda?\" e cortes no perfil de outros empresários.",s:[
+  ["monica-card","DHG_eUCxroB","43 mil","38 comentários","Post estático: \"Só pode liderar quem sabe ser liderado.\" Uma frase, fundo limpo."],
+  ["monica-reel","CwBRk_XKd5S","16 mil","222 comentários","Corte de podcast: \"A vida não é linear.\" Liderança com vulnerabilidade."],
+  ["alfredo-monica","DchXX9avXyO","3,2 mil","157 comentários","Collab: Alfredo Soares conta o que aprendeu com ela no podcast."]]},
+ {u:"marciamatossz",f:"12 mil seguidores",steal:"Ranking e troféu como prova social. Evitar as frases genéricas de prosperidade, que não diferenciam.",s:[
+  ["marcia","DeuPfcLnMuA","1º lugar","28 comentários","Carrossel: \"Dois troféus, duas conquistas\". A Paloma tem o mesmo ativo com o Ranking HS."]]},
+ {u:"mariachutti",f:"4,6 mil seguidores",steal:"Mulher CEO + mãe + dado de mercado. Carrossel com texto honesto vira salvamento e compartilhamento.",s:[
+  ["mari","Db_vTw8EZa0","674","47 reposts","Carrossel collab: \"Toda mulher que deu certo na carreira tem uma rede por trás.\""]]}
+];
+document.getElementById('refs').innerHTML=R.map(r=>`<article class="ref"><div class="ref-info"><div class="who"><a href="https://www.instagram.com/${r.u}/" target="_blank" rel="noopener">@${r.u}</a><span class="fol">${r.f}</span></div><p class="steal"><span>O que vamos roubar</span>${r.steal}</p></div><div class="shots">${r.s.map(([img,code,big,sub,what])=>`<figure class="shot"><button type="button" class="zoom" data-src="paloma-assets/${img}.jpg" aria-label="Ampliar print"><img src="paloma-assets/${img}.jpg" alt="Print do post de @${r.u}: ${what.replace(/"/g,'&quot;')}" loading="lazy"></button><figcaption><span class="big">${big}</span><span class="muted" style="font-size:12px">curtidas · ${sub}</span><span class="what">${what}</span><a class="go" href="https://www.instagram.com/p/${code}/" target="_blank" rel="noopener">Abrir post ↗</a></figcaption></figure>`).join('')}</div></article>`).join('');
+
+// lightbox
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
+document.addEventListener('click',e=>{const z=e.target.closest('.zoom');if(z){lbImg.src=z.dataset.src;lbImg.alt=z.querySelector('img').alt;lb.hidden=false;return}if(!lb.hidden&&e.target.closest('#lightbox'))lb.hidden=true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true});
+
+// animate bars when visible (repouso já é visível após load)
+const fills=[...document.querySelectorAll('.f[data-w]')];
+const setW=el=>el.style.width=el.dataset.w+'%';
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){setW(e.target);io.unobserve(e.target)}}),{threshold:.2});
+  fills.forEach(f=>io.observe(f));
+  setTimeout(()=>fills.forEach(setW),2500); // garante estado final
+}else fills.forEach(setW);
+
+// counters
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const end=+el.dataset.count,pre=el.dataset.pre||'',suf=el.dataset.suf||'',sep=el.dataset.sep;
+  const f=n=>pre+(sep?Math.round(n).toLocaleString('pt-BR'):Math.round(n))+suf;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const t0=performance.now(),d=1400;
+  (function tick(t){const k=Math.min((t-t0)/d,1);el.textContent=f(end*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(tick)})(t0);
+});
+
+// bio toggle
+const bios={
+  old:{name:"Paloma Ferreira / FR CONSÓRCIOS",cat:"Empreendedor",bio:"Estratégias para construção patrimonial.\n+8 anos transformando crédito em estratégia\nCEO • FR Consórcios\n↓ Fale com meu...\nsimular.gratis/h/...",hl:[["D","Disciplina"],["N","Nic"]]},
+  new:{name:"Paloma Ferreira | Liderança & Vendas",cat:"Empreendedora",bio:"CEO da FR · R$40 mi/ano em vendas\nMostro como lidero o time que bate meta todo mês\nGestão, comercial e bastidores reais\n↓ Lista de espera da mentoria",hl:[["R$","Almoço do Milhão"],["T","Meu time"],["FR","Consórcio"],["M","Mentoria"],["P","Sobre mim"]]}
+};
+function showBio(k){const b=bios[k];pName.textContent=b.name;pCat.textContent=b.cat;pBio.textContent=b.bio;pHl.innerHTML=b.hl.map(([i,l])=>`<div><i>${i}</i>${l}</div>`).join('');bioOld.classList.toggle('on',k==='old');bioNew.classList.toggle('on',k==='new')}
+bioOld.onclick=()=>showBio('old');bioNew.onclick=()=>showBio('new');showBio('old');
+
+// ideias
+const I=[
+["Topo","Reel","Coisas que eu não tolero no meu time","\"Trabalhar comigo é bom. Mas tem 3 coisas que eu não tolero.\"","Salva e manda pro seu sócio","Reel viral da Paloma"],
+["Topo","Reel","POV: o vendedor bateu a meta no dia 29","Cena muda, só legenda e a reação da Paloma.","Marca o vendedor que é assim","Reel viral da Paloma"],
+["Topo","Reel","Eu demitiria meu melhor vendedor?","\"Já demiti quem mais vendia. E faria de novo.\"","Concorda ou discorda?","Mônica Hauck"],
+["Topo","Reel","Quanto custa um vendedor errado","\"Um vendedor errado custou R$ __ pra minha empresa. Faz a conta comigo.\"","Segue pra mais contas reais","Fernando Batalha"],
+["Topo","Reel","Ser mulher CEO num mercado de homens","\"Na primeira reunião, perguntaram quem era o dono.\"","Manda pra uma mulher que lidera","Mari Achutti"],
+["Topo","Reel","Um dia na rotina da CEO de R$40 mi","\"6h. Isso aqui é o que faz uma empresa vender 40 milhões por ano.\"","Segue pra ver amanhã","Mônica · bastidor"],
+["Topo","Reel","A frase proibida na FR","\"Aqui dentro é proibido falar 'não deu'.\"","Qual frase você proibiria?","Reel viral da Paloma"],
+["Topo","Reel","Reagindo a conselhos de liderança do LinkedIn","Green screen: \"Esse conselho quebra uma empresa.\"","Manda o pior conselho que você já ouviu","Tamis · cortes"],
+["Topo","Reel","Contratei pela atitude, não pelo currículo","História real de alguém do time que cresceu na FR.","Salva pra próxima contratação","Mônica · vaga de aprendiz"],
+["Topo","Reel","Expectativa x realidade de abrir uma empresa","Trend em dois takes: o sonho e o boleto.","Marca quem empreende","Trend que já rendeu 127 curtidas"],
+["Meio","Carrossel","O ritual de segunda que faz o time vender R$8,5 mi","\"Toda segunda às 8h, minha equipe faz isso.\"","Comenta RITUAL e recebe o roteiro","Tamis · comment-to-DM"],
+["Meio","Carrossel","Como eu monto a meta do mês","Passo a passo: do número da empresa à meta de cada vendedor.","Comenta META e recebe a planilha","Tamis · comment-to-DM"],
+["Meio","Carrossel","5 números que eu olho todo dia","\"Se você não sabe esses 5 números, você não tem um comercial.\"","Salva e confere amanhã","Fernando · cálculo"],
+["Meio","Carrossel","O follow-up que mais fecha na FR","Script real, com a mensagem exata.","Comenta SCRIPT e recebe no direct","Tamis · comment-to-DM"],
+["Meio","Reel","Como dar feedback sem desmotivar","\"O feedback que eu dava fazia gente pedir demissão.\"","Salva pra próxima 1:1","Mônica · liderança"],
+["Meio","Carrossel","Comissão que faz vender sem quebrar a margem","Modelo de remuneração da FR, por faixa.","Comenta COMISSÃO","Márcia · número"],
+["Meio","Carrossel","Onboarding de vendedor em 7 dias","Dia 1 ao dia 7: o que o novo vendedor faz.","Salva e aplica","Mônica · gestão de pessoas"],
+["Meio","Carrossel","4 perfis de vendedor e como liderar cada um","\"Você lidera todo mundo igual? Esse é o erro.\"","Qual perfil é você?","Mônica · perfil comportamental"],
+["Meio","Carrossel","Consórcio como alavanca de caixa da empresa","Simulação: expandir sem juros de banco.","Comenta CAIXA e recebe a simulação","Márcia + Fernando"],
+["Meio","Carrossel","Erros que eu cometi nos 2 primeiros anos da FR","\"Se eu pudesse voltar, mudaria 5 coisas.\"","Salva antes de errar igual","Mari · vulnerabilidade"],
+["Fundo","Reel","Almoço do Milhão: o bastidor","Número na tela: \"R$ 8,5 milhões em um mês. Te mostro como.\"","Segue pra ver o próximo","Márcia · troféus"],
+["Fundo","Carrossel","De 0 a R$40 mi: a linha do tempo da FR","Foto antiga + foto do time hoje.","Comenta FR e conto o capítulo que ninguém sabe","Mari · narrativa"],
+["Fundo","Reel","Meu time fala de mim","Colaboradores respondem: \"Como é trabalhar com a Paloma?\"","Você trabalharia comigo?","Reel viral da Paloma"],
+["Fundo","Reel","3ª contemplação do mesmo cliente","\"Não é sorte, é estratégia.\" Cliente real conta.","Link na bio","Post da própria Paloma"],
+["Fundo","Reel","Respondo sua dúvida de gestão","Comentário na tela + resposta direta.","Deixa sua dúvida aqui","Tamis · interação"],
+["Fundo","Reel","Diagnóstico ao vivo do seu comercial","\"Um seguidor me mandou os números. Olha o que eu faria.\"","Comenta DIAGNÓSTICO","Tamis · comment-to-DM"],
+["Fundo","Reel","O que eu faria se começasse hoje do zero","\"Sem time, sem carteira, sem dinheiro. Passo 1:\"","Salva esse plano","Fernando · aspiracional"],
+["Fundo","Reel","Ranking HS: como a FR chegou entre as melhores","Bastidor do evento + o que mudou no time.","Segue pra acompanhar","Márcia · ranking"],
+["Fundo","Carrossel","Lista de espera: mentoria para donos de empresa","\"Vou abrir 10 vagas. Isso é o que vamos fazer juntos.\"","Link na bio","Mês 5 em diante"],
+["Fundo","Carrossel","Mesa de CEO: o que aprendi com @convidado","Collab com outro empresário, 5 lições.","Marca um empresário","Mônica + Alfredo Soares"]
+];
+const idEl=document.getElementById('ideas');
+idEl.innerHTML=I.map((x,i)=>`<article class="idea" id="idea${i+1}" data-st="${x[0]}" data-fmt="${x[1]}"><div class="top"><span class="n">#${String(i+1).padStart(2,'0')}</span><span class="pillrow"><span class="pill ${x[0]==='Topo'?'p-jade':x[0]==='Meio'?'p-grey':'p-green'}">${x[0]}</span><span class="pill p-grey">${x[1]}</span></span></div><h3>${x[2]}</h3><p class="hook">${x[3]}</p><div class="meta"><span>CTA: <b>${x[4]}</b></span><span>Inspiração: <b>${x[5]}</b></span></div></article>`).join('');
+const cards=[...idEl.children];
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));
+  const f=b.dataset.f;cards.forEach(c=>c.hidden=!(f==='all'||c.dataset.st===f||c.dataset.fmt===f));
+});
+
+// calendário do mês 1
+const cal=[["Sem 1 · 9–13 nov",[["Seg 09/11",1],["Qua 11/11",11],["Sex 13/11",6]]],["Sem 2 · 16–20 nov",[["Seg 16/11",3],["Qua 18/11",14],["Sex 20/11",4]]],["Sem 3 · 23–27 nov",[["Seg 23/11",2],["Qua 25/11",18],["Sex 27/11",23]]],["Sem 4 · 30 nov–4 dez",[["Seg 30/11",7],["Qua 02/12",22],["Sex 04/12",21]]]];
+document.getElementById('cal').innerHTML=cal.map(([w,s])=>`<div class="wk"><span class="label">${w}</span>${s.map(([d,n])=>{const x=I[n-1];return `<div class="slot" tabindex="0" data-go="${n}"><span class="d"><span>${d}</span><span>${x[1]}</span></span><b>${x[2]}</b></div>`}).join('')}</div>`).join('');
+document.getElementById('cal').addEventListener('click',go);document.getElementById('cal').addEventListener('keydown',e=>{if(e.key==='Enter')go(e)});
+function go(e){const s=e.target.closest('.slot');if(!s)return;document.querySelector('#filters [data-f=all]').click();const c=document.getElementById('idea'+s.dataset.go);c.scrollIntoView({behavior:'smooth',block:'center'});c.classList.add('flash');setTimeout(()=>c.classList.remove('flash'),2200)}
+
+// calculadora de crescimento
+(function(){
+  const M=["nov","dez","jan","fev","mar","abr","mai"];
+  const ORG=[2327,2900,3600,4400,5300,6300,7500]; // orgânico estimado com 3 posts/semana
+  const W=640,H=340,L=52,R=24,T=34,B=36,MAX=40000;
+  const x=i=>L+i*(W-L-R)/6, y=v=>T+(1-v/MAX)*(H-T-B);
+  const inv=py=>(1-(py-T)/(H-T-B))*MAX;
+  let st={m:6,goal:15000,cpf:1.2};
+  const svg=document.getElementById('calcSvg');
+  const brl=v=>'R$ '+Math.round(v).toLocaleString('pt-BR');
+  const k=v=>(v>=1000?(v/1000).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mil':Math.round(v).toLocaleString('pt-BR'));
+
+  function draw(){
+    const {m,goal}=st, org=ORG[m], gap=Math.max(0,goal-org);
+    const tot=i=>i<=m?ORG[i]+gap*(i/m):ORG[i]+gap;
+    let g='';
+    [0,10000,20000,30000,40000].forEach(v=>{g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--border)"/><text x="${L-10}" y="${y(v)+4}" text-anchor="end">${v/1000}k</text>`});
+    M.forEach((n,i)=>{g+=`<text x="${x(i)}" y="${H-12}" text-anchor="middle" style="${i===m?'fill:var(--white);font-weight:600':''}">${n}</text>`});
+    g+=`<line x1="${x(m)}" x2="${x(m)}" y1="${T-6}" y2="${H-B}" stroke="var(--pounamuLine)" stroke-dasharray="3 4"/>`;
+    const top=M.map((_,i)=>`${i?'L':'M'}${x(i)} ${y(tot(i))}`).join(' ');
+    const bot=M.map((_,i)=>`L${x(6-i)} ${y(ORG[6-i])}`).join(' ');
+    g+=`<path d="${top} ${bot} Z" fill="rgba(60,110,82,.22)"/>`;
+    g+=`<path d="${M.map((_,i)=>`${i?'L':'M'}${x(i)} ${y(ORG[i])}`).join(' ')}" fill="none" stroke="var(--silverDim)" stroke-width="2" stroke-dasharray="5 5"/>`;
+    g+=`<path d="${top}" fill="none" stroke="var(--pounamu)" stroke-width="3"/>`;
+    g+=`<circle cx="${x(0)}" cy="${y(ORG[0])}" r="4" fill="var(--silverDim)"/><text x="${x(0)+8}" y="${y(ORG[0])-10}">hoje 2,3 mil</text>`;
+    const px=x(m),py=y(goal),anc=m>=5?'end':'middle',tx=m>=5?px-16:px;
+    g+=`<g id="dragPt" tabindex="0" role="slider" aria-label="Meta de seguidores" aria-valuemin="${org}" aria-valuemax="${MAX}" aria-valuenow="${goal}" aria-valuetext="${k(goal)} seguidores em ${M[m]}">
+      <circle class="halo" cx="${px}" cy="${py}" r="11" fill="var(--pounamu)"/>
+      <circle cx="${px}" cy="${py}" r="22" fill="transparent"/>
+      <circle class="ring" cx="${px}" cy="${py}" r="11" fill="var(--pounamu)" stroke="var(--black)" stroke-width="3"/>
+      <text class="tip" x="${tx}" y="${py-20}" text-anchor="${anc}">${k(goal)}</text></g>`;
+    svg.innerHTML=g;
+    const total=gap*st.cpf, dias=m*30;
+    cMeta.textContent=k(goal);
+    cPrazo.textContent=`seguidores em ${m} ${m>1?'meses':'mês'} (${M[m]})`;
+    cOrg.textContent=k(org); cPaid.textContent=k(gap);
+    cTotal.textContent=gap?brl(total):'R$ 0';
+    cMes.textContent=brl(total/m); cDia.textContent=brl(total/dias);
+    cpfV.textContent='R$ '+st.cpf.toFixed(2).replace('.',',');
+  }
+  function setFrom(evt){
+    const r=svg.getBoundingClientRect(),sx=(evt.clientX-r.left)/r.width*W,sy=(evt.clientY-r.top)/r.height*H;
+    const m=Math.min(6,Math.max(1,Math.round((sx-L)/((W-L-R)/6))));
+    let v=Math.round(inv(sy)/500)*500; v=Math.min(MAX,Math.max(ORG[m],v));
+    st.m=m;st.goal=v;draw();
+  }
+  let drag=false;
+  svg.addEventListener('pointerdown',e=>{drag=true;svg.setPointerCapture(e.pointerId);setFrom(e)});
+  svg.addEventListener('pointermove',e=>{if(drag)setFrom(e)});
+  svg.addEventListener('pointerup',()=>{drag=false;const d=document.getElementById('dragPt');d&&d.focus({preventScroll:true})});
+  svg.addEventListener('keydown',e=>{
+    const step=e.shiftKey?2500:500;
+    if(e.key==='ArrowUp')st.goal=Math.min(MAX,st.goal+step);
+    else if(e.key==='ArrowDown')st.goal=Math.max(ORG[st.m],st.goal-step);
+    else if(e.key==='ArrowRight')st.m=Math.min(6,st.m+1);
+    else if(e.key==='ArrowLeft')st.m=Math.max(1,st.m-1);
+    else return;
+    e.preventDefault();st.goal=Math.max(st.goal,ORG[st.m]);draw();document.getElementById('dragPt').focus({preventScroll:true});
+  });
+  const sc=[...document.querySelectorAll('#scen button')];
+  sc.forEach(b=>b.addEventListener('click',()=>{st.cpf=+b.dataset.v;cpf.value=st.cpf;sc.forEach(o=>o.classList.toggle('on',o===b));draw()}));
+  cpf.addEventListener('input',()=>{st.cpf=+cpf.value;sc.forEach(o=>o.classList.toggle('on',Math.abs(+o.dataset.v-st.cpf)<.001));draw()});
+  draw();
+})();
+
+// nav ativo
+const secs=[...document.querySelectorAll('section[id]')],links=[...document.querySelectorAll('#navlinks a')];
+if('IntersectionObserver' in window){const no=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});secs.forEach(s=>no.observe(s))}
+</script>
+
+</body>
+</html>
