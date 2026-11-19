@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="paloma-assets/mark.png">
+<title>FR Consórcios · Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Apresentação em blocos de tela cheia, identidade Puna (dark, acento pounamu) — mesmo sistema da página da Paloma. */
+:root{
+  --black:#0A0A0A;--charcoal:#161616;--silver:#C7C7C7;--silverBright:#EDEDED;--silverDim:#8A8A8A;
+  --border:#2A2A2A;--white:#FFFFFF;--pounamu:#3C6E52;--jade:#8FC3A5;--pounamuSoft:rgba(60,110,82,.18);--pounamuLine:rgba(60,110,82,.55);
+  --green:#1DA462;--amber:#E8A710;--red:#E31010;
+  --display:"Montserrat",system-ui,sans-serif;--body:"Poppins",system-ui,sans-serif;color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--silverBright);font-family:var(--body);font-size:15px;line-height:1.55;margin:0;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{position:relative;padding-block:96px;border-top:1px solid var(--border);overflow:hidden}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;color:var(--white)}
+h2{font-size:clamp(30px,4.4vw,52px);font-weight:800;line-height:1.05;letter-spacing:-.02em;max-width:19ch}
+h3{font-size:19px;font-weight:700;line-height:1.2}
+p{margin:0}
+.muted{color:var(--silverDim)}
+.num{font-variant-numeric:tabular-nums}
+em{font-style:normal;color:var(--pounamu)}
+
+nav.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+nav.top .wrap{display:flex;align-items:center;gap:20px;height:54px}
+nav.top .brand img{display:block;height:24px;width:auto}
+nav.top .links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+nav.top .links::-webkit-scrollbar{display:none}
+nav.top .links a{font-size:12px;text-decoration:none;color:var(--silverDim);padding:6px 10px;border-radius:999px;white-space:nowrap;transition:.2s}
+nav.top .links a:hover,nav.top .links a.on{color:var(--white);background:var(--pounamuSoft)}
+
+.tag{display:inline-flex;align-items:center;gap:8px;background:var(--charcoal);border:1px solid var(--silver);padding:6px 12px;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silverBright);margin-bottom:22px}
+.tag svg{width:14px;height:14px}
+.lead{font-size:17px;color:var(--silver);max-width:60ch;margin-top:16px}
+.head{margin-bottom:44px}
+.label{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--silverDim);font-weight:600}
+.koru-bg{position:absolute;pointer-events:none;opacity:.07}
+.koru-bg path{stroke:var(--pounamu)}
+
+/* capa */
+.cover{border-top:0;padding-block:72px 88px}
+.cover-mark{position:absolute;right:-60px;top:-40px;height:640px;width:auto;opacity:.09;pointer-events:none}
+.cover-logo{height:44px;width:auto;display:block;margin-bottom:36px}
+.cover .eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--silverDim)}
+.cover h1{font-size:clamp(40px,7.2vw,90px);font-weight:900;line-height:.95;letter-spacing:-.035em;margin-top:20px;max-width:14ch}
+.cover .sub{font-size:18px;color:var(--silver);max-width:54ch;margin-top:26px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-top:56px}
+.stat{background:var(--black);padding:22px 20px}
+.stat b{display:block;font-family:var(--display);font-size:clamp(28px,3.6vw,44px);font-weight:800;color:var(--white);letter-spacing:-.02em;line-height:1}
+.stat span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--silverDim);margin-top:10px}
+.stat.hl b{color:var(--pounamu)}
+.gap-line{margin-top:28px;display:flex;align-items:center;gap:14px;font-size:14px;color:var(--silver)}
+.gap-line b{font-family:var(--display);font-size:22px;color:var(--white)}
+
+/* charts */
+.chart{background:var(--charcoal);border:1px solid var(--border);padding:28px}
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr) 46px;gap:14px;align-items:center;font-size:12.5px}
+.bar .l{color:var(--silver);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .t{height:16px;background:rgba(255,255,255,.04);position:relative}
+.bar .f{position:absolute;inset:0 auto 0 0;background:var(--silverDim);width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.bar.good .f{background:var(--pounamu)}.bar.good .l{color:var(--white)}
+.bar.bad .f{background:rgba(227,16,16,.55)}
+.bar .v{text-align:right;font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--silver);margin-bottom:18px}
+.legend i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:start}
+.box{background:var(--charcoal);border:1px solid var(--border);padding:24px}
+.box.line{border-top:2px solid var(--pounamu)}
+.list{display:flex;flex-direction:column;gap:12px;list-style:none;padding:0;margin:0}
+.list li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:14.5px;color:var(--silver)}
+.list li svg{width:18px;height:18px;margin-top:3px}
+.list li b{color:var(--white);font-weight:600}
+.pillrow{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.p-red{background:rgba(227,16,16,.15);color:var(--red)}.p-amber{background:rgba(232,167,16,.15);color:var(--amber)}
+.p-green{background:rgba(29,164,98,.15);color:var(--green)}.p-jade{background:var(--pounamuSoft);color:var(--jade)}
+.p-grey{background:rgba(199,199,199,.1);color:var(--silver)}
+.callout{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin-top:26px;padding-top:22px;border-top:1px solid var(--border)}
+.callout b{font-family:var(--display);font-size:64px;font-weight:900;color:var(--pounamu);line-height:1;letter-spacing:-.03em}
+
+/* comparativo das contas */
+.cmp{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.acc{background:var(--charcoal);border:1px solid var(--border);padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.acc.me{border-color:var(--pounamuLine);background:linear-gradient(180deg,rgba(60,110,82,.14),var(--charcoal))}
+.acc .h{font-family:var(--display);font-weight:700;font-size:15px;color:var(--white);text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acc .fol{font-family:var(--display);font-weight:900;font-size:clamp(24px,2.6vw,32px);line-height:1;color:var(--white);letter-spacing:-.02em;white-space:nowrap}
+.acc .fol small{display:block;margin:6px 0 0!important;font-size:10.5px;font-weight:600;color:var(--silverDim);letter-spacing:.1em;margin-left:6px}
+.ring{width:100%;height:10px;background:rgba(255,255,255,.05);position:relative}
+.ring i{position:absolute;inset:0 auto 0 0;background:var(--silverDim);width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.acc.me .ring i{background:var(--pounamu)}
+.strip{display:flex;align-items:flex-end;gap:1px;height:70px;position:relative;border-bottom:1px solid var(--border)}
+.strip span{flex:1;background:var(--silverDim);opacity:.6;min-height:1px;transform-origin:bottom;transform:scaleY(0);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.acc.me .strip span{background:var(--pounamu);opacity:1}
+.strip .avg{position:absolute;left:0;right:0;border-top:1px dashed var(--amber)}
+.strip .avg em{position:absolute;right:0;top:-17px;font-size:10.5px;color:var(--amber);font-style:normal}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.kv div{background:var(--charcoal);padding:10px 12px}
+.kv b{display:block;font-family:var(--display);font-size:19px;font-weight:800;color:var(--silverBright)}
+.acc.me .kv div{background:#121a15}
+
+/* prints */
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.shot{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.shot figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.shot .big{font-family:var(--display);font-weight:900;font-size:24px;color:var(--white);letter-spacing:-.02em;line-height:1}
+.shot .big small{font-size:10.5px;font-weight:600;letter-spacing:.1em;color:var(--silverDim);margin-left:4px}
+.shot .sub{font-size:12px;color:var(--silverDim)}
+.shot .what{font-size:12.5px;color:var(--silver);flex-basis:100%}
+.shot .kind{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--jade)}
+.zoom{all:unset;cursor:zoom-in;display:block;line-height:0;border:1px solid var(--border);overflow:hidden;transition:border-color .2s}
+.zoom:hover,.zoom:focus-visible{border-color:var(--pounamu)}
+.zoom img{width:100%;height:auto;display:block;transition:transform .4s}
+.zoom:hover img{transform:scale(1.02)}
+.shot a.go{font-size:12px;color:var(--jade);text-decoration:none}
+.shot a.go:hover{text-decoration:underline}
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(10,10,10,.94);display:grid;place-items:center;padding:24px 16px;cursor:zoom-out}
+.lightbox img{max-width:min(1000px,100%);max-height:100%;width:auto;height:auto;border:1px solid var(--border)}
+.lb-close{all:unset;cursor:pointer;position:absolute;top:14px;right:18px;font-size:34px;line-height:1;color:var(--white)}
+.newtag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--pounamu);color:var(--white);padding:3px 8px;border-radius:999px;vertical-align:middle;margin-left:8px}
+
+/* refs com celulares */
+.refs{display:flex;flex-direction:column;gap:64px;margin-top:64px}
+.ref{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:32px;align-items:start}
+.ref-info{display:flex;flex-direction:column;gap:14px;position:sticky;top:80px}
+.ref-info .who a{font-family:var(--display);font-weight:800;font-size:22px;text-decoration:none;color:var(--white)}
+.ref-info .who a:hover{color:var(--jade)}
+.ref-info .bio{font-size:13px;color:var(--silverDim);border:1px dashed var(--border);padding:12px;white-space:pre-line}
+.steal{font-size:14px;color:var(--silver);border-left:2px solid var(--pounamu);padding-left:14px}
+.steal span{color:var(--jade);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px}
+.phones{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.phone{position:relative;aspect-ratio:9/16;border-radius:18px;border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:14px 12px;text-decoration:none;transition:transform .25s,border-color .25s;background:#111}
+.phone:hover{transform:translateY(-4px);border-color:var(--pounamu)}
+.phone::before{content:"";position:absolute;inset:0;background:var(--g);opacity:.9}
+.phone>*{position:relative}
+.phone .kind{align-self:flex-start;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(0,0,0,.45);padding:3px 8px;border-radius:999px;color:var(--white)}
+.phone .hk{font-family:var(--display);font-weight:800;font-size:15px;line-height:1.15;color:var(--white);text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.phone .ft{display:flex;flex-direction:column;gap:2px}
+.phone .vw{font-family:var(--display);font-weight:900;font-size:22px;color:var(--white);line-height:1}
+.phone .vw small{font-size:10px;font-weight:600;letter-spacing:.1em;margin-left:4px;color:var(--silverBright)}
+.phone .eng{font-size:10.5px;color:var(--silverBright)}
+.g1{--g:linear-gradient(160deg,#3C6E52 0%,#0f1f17 70%)}
+.g2{--g:linear-gradient(160deg,#5a4a1a 0%,#14110a 75%)}
+.g3{--g:linear-gradient(160deg,#2c2c34 0%,#0c0c10 75%)}
+.g4{--g:linear-gradient(160deg,#6b1f1f 0%,#150909 75%)}
+.g5{--g:linear-gradient(160deg,#1f3b5c 0%,#0a1018 75%)}
+
+/* mecânica */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin-top:10px;position:relative}
+.node{position:relative;padding:22px 18px;border:1px solid var(--border);background:var(--charcoal);margin-right:-1px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.node .ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--black);border:1px solid var(--pounamuLine);font-size:20px}
+.node h3{font-size:16px}
+.node p{font-size:12.5px;color:var(--silver)}
+.node .who{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--jade);font-weight:600;margin-top:auto}
+.node:not(:last-child)::after{content:"";position:absolute;right:-9px;top:44px;width:16px;height:16px;background:var(--pounamu);clip-path:polygon(0 0,100% 50%,0 100%);z-index:2}
+.node.hot{border-color:var(--pounamu);background:linear-gradient(180deg,rgba(60,110,82,.2),var(--charcoal))}
+.dm{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
+.chat{background:#0f0f0f;border:1px solid var(--border);border-radius:22px;padding:18px;max-width:380px;display:flex;flex-direction:column;gap:10px;min-height:360px}
+.chat .hd{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--white)}
+.chat .av{width:30px;height:30px;border-radius:50%;background:var(--pounamu);display:grid;place-items:center;font-size:11px;font-family:var(--display);font-weight:800}
+.msg{max-width:82%;padding:9px 13px;border-radius:16px;font-size:13px;line-height:1.4;opacity:0;transform:translateY(8px);transition:.4s}
+.msg.in{opacity:1;transform:none}
+.msg.u{align-self:flex-end;background:#3a3a3a;color:var(--white);border-bottom-right-radius:4px}
+.msg.b{align-self:flex-start;background:var(--pounamu);color:var(--white);border-bottom-left-radius:4px}
+.msg.c{align-self:center;background:transparent;border:1px dashed var(--border);color:var(--silverDim);font-size:11.5px}
+.replay{all:unset;cursor:pointer;font-size:12px;color:var(--jade);margin-top:8px;display:inline-block}
+.replay:focus-visible{outline:2px solid var(--pounamu)}
+
+/* pilares */
+.pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.pillar{background:var(--charcoal);border:1px solid var(--border);border-top:2px solid var(--silver);padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pillar.big{border-top-color:var(--pounamu)}
+.pillar .pct{font-family:var(--display);font-weight:900;font-size:44px;line-height:1;color:var(--white)}
+.pillar.big .pct{color:var(--pounamu)}
+.pillar p{font-size:13.5px;color:var(--silver)}
+.pillar .ex{font-size:12.5px;color:var(--silverDim);border-top:1px solid var(--border);padding-top:10px;margin-top:auto}
+.donut{display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:center;margin-bottom:40px}
+.donut svg{width:220px;height:220px}
+
+/* perfil */
+.profile{background:var(--charcoal);border:1px solid var(--border);padding:24px;max-width:460px}
+.toggle{display:inline-flex;border:1px solid var(--border);border-radius:999px;padding:3px;margin-bottom:18px}
+.toggle button{all:unset;cursor:pointer;font-size:12px;font-weight:600;padding:6px 16px;border-radius:999px;color:var(--silverDim)}
+.toggle button.on{background:var(--pounamu);color:var(--white)}
+.toggle button:focus-visible{outline:2px solid var(--silver)}
+.prof-h{display:flex;gap:16px;align-items:center}
+.avatar{width:64px;height:64px;border-radius:50%;border:2px solid var(--pounamu);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--black);flex:none}
+.prof-name{font-weight:600;color:var(--white)}
+.prof-cat{font-size:12px;color:var(--silverDim)}
+.prof-bio{margin-top:14px;font-size:14px;color:var(--silverBright);white-space:pre-line;min-height:110px}
+.prof-hl{display:flex;gap:12px;margin-top:16px;overflow-x:auto}
+.prof-hl div{flex:none;text-align:center;font-size:11px;color:var(--silver);width:62px}
+.prof-hl div i{width:52px;height:52px;margin:0 auto 6px;border-radius:50%;border:1px solid var(--border);background:var(--black);display:grid;place-items:center;font-style:normal;font-family:var(--display);font-weight:800;color:var(--pounamu)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.duo .box h3{font-size:16px;margin:8px 0 6px}
+.duo .box p{font-size:13px;color:var(--silver)}
+
+/* séries */
+.series{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.serie{border:1px solid var(--border);padding:22px;display:flex;flex-direction:column;gap:10px;background:var(--black);transition:border-color .2s,transform .2s}
+.serie:hover{border-color:var(--pounamu);transform:translateY(-3px)}
+.serie .em{font-size:30px;line-height:1}
+.serie .freq{font-size:11px;color:var(--jade);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.serie h3{font-size:20px}
+.serie p{font-size:13.5px;color:var(--silver)}
+.serie .src{font-size:11.5px;color:var(--silverDim);margin-top:auto}
+
+/* semana */
+.weekgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.day{border:1px solid var(--border);padding:14px 12px;min-height:150px;display:flex;flex-direction:column;gap:8px;background:var(--black);min-width:0}
+.day .dn{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--silverDim);font-weight:600}
+.day.post{background:var(--charcoal);border-color:var(--pounamuLine)}
+.day .fmt{font-family:var(--display);font-weight:800;font-size:17px;color:var(--white)}
+.day small{font-size:12px;color:var(--silver);line-height:1.4}
+.day .st{font-size:11.5px;color:var(--silverDim);margin-top:auto}
+.cal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:22px}
+.wk{display:flex;flex-direction:column;gap:10px;min-width:0}
+.wk .label{padding-bottom:6px;border-bottom:1px solid var(--border)}
+.slot{background:var(--charcoal);border:1px solid var(--border);padding:14px;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:border-color .2s}
+.slot:hover,.slot:focus-visible{border-color:var(--pounamu);outline:none}
+.slot .d{font-size:11px;color:var(--silverDim);display:flex;justify-content:space-between;gap:6px}
+.slot b{font-size:13.5px;font-weight:600;color:var(--white);line-height:1.35}
+
+/* ideias */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.filters button{all:unset;cursor:pointer;font-size:12.5px;font-weight:500;padding:8px 16px;border:1px solid var(--border);border-radius:999px;color:var(--silver);transition:.2s}
+.filters button.on{background:var(--white);color:var(--black);border-color:var(--white)}
+.filters button:focus-visible{outline:2px solid var(--pounamu)}
+.filters .sep{width:1px;background:var(--border);margin:0 6px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.idea{background:var(--charcoal);border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0;transition:border-color .2s}
+.idea:hover{border-color:var(--pounamuLine)}
+.idea .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.idea .n{font-family:var(--display);font-weight:800;color:var(--silverDim);font-size:13px}
+.idea h3{font-size:16.5px}
+.idea .hook{font-size:13.5px;color:var(--silverBright);border-left:2px solid var(--pounamu);padding-left:12px;font-style:italic}
+.idea .kw{align-self:flex-start;font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.12em;border:1px solid var(--pounamuLine);color:var(--jade);padding:4px 10px}
+.idea .meta{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--silverDim);margin-top:auto;padding-top:10px;border-top:1px solid var(--border)}
+.idea .meta b{color:var(--silver);font-weight:500}
+.idea.flash{border-color:var(--pounamu);box-shadow:0 0 0 1px var(--pounamu)}
+
+/* simulador */
+.sim{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px}
+.sl{display:flex;flex-direction:column;gap:22px}
+.sl label{display:flex;justify-content:space-between;font-size:13.5px;color:var(--silver);margin-bottom:8px}
+.sl label b{color:var(--white);font-variant-numeric:tabular-nums}
+.sl input{width:100%;accent-color:#3C6E52}
+.sl small{font-size:11.5px;color:var(--silverDim);display:block;margin-top:4px}
+.out{background:var(--charcoal);border:1px solid var(--border);border-top:2px solid var(--pounamu);padding:24px;display:flex;flex-direction:column;gap:18px}
+.out .big{font-family:var(--display);font-weight:900;font-size:clamp(48px,6vw,72px);color:var(--white);line-height:1;letter-spacing:-.03em}
+.funnelv{display:flex;flex-direction:column;gap:6px}
+.fv{display:grid;grid-template-columns:110px minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:12.5px;color:var(--silver)}
+.fv .t{height:22px;background:rgba(255,255,255,.04);position:relative}
+.fv .t i{position:absolute;inset:0 auto 0 0;background:var(--silverDim);transition:width .5s}
+.fv:last-child .t i{background:var(--pounamu)}
+.fv b{text-align:right;color:var(--white);font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:40px}
+.kpi{background:var(--charcoal);border:1px solid var(--border);border-top:2px solid var(--silver);padding:20px}
+.kpi b{font-family:var(--display);font-size:30px;font-weight:800;color:var(--white);display:block;margin-top:6px;line-height:1.1}
+.kpi p{font-size:12.5px;color:var(--silverDim);margin-top:6px}
+
+.next{display:flex;flex-direction:column}
+.nx{display:grid;grid-template-columns:70px 1fr auto;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--border)}
+.nx .i{font-family:var(--display);font-weight:900;font-size:36px;color:var(--pounamu);line-height:1}
+.nx h3{font-size:17px}
+.nx p{font-size:13.5px;color:var(--silverDim);margin-top:4px}
+footer{border-top:1px solid var(--border);padding-block:28px;font-size:11px;color:var(--silverDim)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center}
+footer img{height:18px;vertical-align:middle;margin-right:8px}
+
+@media (max-width:900px){
+  .grid2,.dm,.sim,.ref{grid-template-columns:1fr}
+  .ref-info{position:static}
+  .stats,.cmp,.pillars,.kpis,.cal{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .acc.me{grid-column:1/-1}
+  .flow{grid-template-columns:1fr}
+  .node{margin-right:0;margin-bottom:-1px}
+  .node:not(:last-child)::after{right:auto;left:40px;top:auto;bottom:-9px;transform:rotate(90deg)}
+  .weekgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .day{min-height:auto}
+  .donut{grid-template-columns:1fr;justify-items:center}
+  .cover-mark{height:420px;right:-120px}
+}
+@media (max-width:560px){
+  section{padding-block:64px}
+  .bar{grid-template-columns:minmax(0,1fr) 46px;row-gap:4px}.bar .l{grid-column:1/-1}
+  .cmp,.pillars,.kpis,.cal,.duo{grid-template-columns:1fr}
+  .phones{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nx{grid-template-columns:48px 1fr}.nx .pill{grid-column:2;justify-self:start}
+  .callout{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style></head><body>
+
+<nav class="top"><div class="wrap">
+  <a class="brand" href="#capa" aria-label="Puna"><img src="paloma-assets/full.png" alt="Puna"></a>
+  <div class="links" id="navlinks">
+    <a href="#raiox">Raio-X</a><a href="#referencias">Referências</a><a href="#mecanica">Dúvida → Conversa</a><a href="#pilares">Pilares</a><a href="#perfil">Perfil</a><a href="#series">Séries</a><a href="#semana">Semana</a><a href="#ideias">30 ideias</a><a href="#metas">Metas</a><a href="#proximos">Próximos passos</a>
+  </div>
+</div></nav>
+
+<!-- CAPA -->
+<section class="cover" id="capa">
+  <img class="cover-mark" src="paloma-assets/mark.png" alt="" aria-hidden="true">
+  <div class="wrap" style="position:relative">
+    <img src="paloma-assets/full.png" alt="Puna" class="cover-logo">
+    <div class="eyebrow">Estratégia de Growth · Instagram @frconsorcios1 · Nov/2026</div>
+    <h1>Uma dúvida por post. Uma <em>conversa</em> por dúvida.</h1>
+    <p class="sub">Plano para o perfil da FR crescer em seguidores e virar a porta de entrada do time de vendas.</p>
+    <div class="stats">
+      <div class="stat hl"><b class="num" data-count="120" data-pre="R$" data-suf="mi">R$120mi</b><span>em consórcios rotacionados</span></div>
+      <div class="stat"><b class="num" data-count="722">722</b><span>seguidores hoje</span></div>
+      <div class="stat"><b class="num" data-count="720">720</b><span>views médias por reel</span></div>
+      <div class="stat"><b class="num" data-count="3" data-suf="/sem">3/sem</b><span>2 reels + 1 carrossel</span></div>
+    </div>
+    <p class="gap-line"><b>26×</b> menor que o @rauberconsorcio, que declara R$100 mi sob gestão. A FR já rotacionou R$120 mi. O resultado da FR ainda não aparece no Instagram.</p>
+  </div>
+</section>
+
+<!-- RAIO-X -->
+<section id="raiox">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>01 · Raio-X do perfil</div>
+    <div class="head"><h2>Gente e conquista funcionam. Política e explicação solta, não.</h2>
+      <p class="lead">Curtidas dos últimos posts do @frconsorcios1, por tipo de pauta.</p></div>
+    <div class="grid2">
+      <div class="chart">
+        <div class="legend"><span><i style="background:var(--pounamu)"></i>Time, cliente, conquista</span><span><i style="background:var(--silverDim)"></i>Explicação de produto</span><span><i style="background:rgba(227,16,16,.55)"></i>Política e mercado</span></div>
+        <div class="bars" id="frBars"></div>
+        <div class="callout"><b class="num">10</b><p class="muted">comentários no reel <b style="color:var(--white)">"Baseado em fatos reais"</b>, de cliente contemplado: o maior número de conversas do perfil. Prova real puxa pergunta.</p></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="box line">
+          <div class="label" style="margin-bottom:14px">O que trava</div>
+          <ul class="list">
+            <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--red)"/></svg><span><b>Política e cenário econômico</b> rendem de 4 a 31 curtidas e não puxam conversa.</span></li>
+            <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--red)"/></svg><span><b>Nenhum post termina com pergunta ou palavra-chave.</b> Quem tem dúvida não sabe o que fazer.</span></li>
+            <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--amber)"/></svg><span><b>Bio genérica:</b> "estratégias para realizar sonhos" não diz o que a FR resolve.</span></li>
+            <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--amber)"/></svg><span><b>Sem série:</b> cada post é um assunto novo, ninguém volta pra ver o próximo.</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <div class="label" style="margin-bottom:14px">O que já temos de ouro</div>
+          <div class="pillrow">
+            <span class="pill p-jade">Top 100 HS</span><span class="pill p-jade">Clientes contemplados</span><span class="pill p-jade">Almoço do Milhão</span><span class="pill p-jade">Destaque do mês</span><span class="pill p-jade">Live do sorteio</span><span class="pill p-jade">Consultoras na câmera</span><span class="pill p-jade">+8 anos</span><span class="pill p-jade">Escritório na Assis Brasil</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERÊNCIAS -->
+<section id="referencias">
+  <svg class="koru-bg" style="left:-160px;bottom:-200px;width:520px;height:520px" viewBox="0 0 100 100"><path class="koru-path" data-turns="3" fill="none" stroke-width=".4"/></svg>
+  <div class="wrap" style="position:relative">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>02 · Raspagem das referências</div>
+    <div class="head"><h2>As referências têm 2 a 4× mais views por reel.</h2>
+      <p class="lead">Cada barrinha é um reel (os ~50 mais recentes de cada conta, do maior para o menor). A linha amarela é a mediana: o reel "normal" de cada perfil, sem distorção de viral ou anúncio.</p></div>
+    <div class="cmp" id="cmp"></div>
+    <p class="muted" style="font-size:12px;margin-top:14px">A7: os dois reels de 77 mil e 127 mil views têm menos de 60 curtidas, sinal de anúncio pago. Por isso a comparação usa a mediana.</p>
+    <div class="refs" id="refs"></div>
+    <p class="muted" style="font-size:12px;margin-top:24px">Prints e números coletados em 06/11/2026 nos perfis públicos. Toque no print para ampliar ou abra o reel no Instagram.</p>
+  </div>
+</section>
+
+<!-- MECÂNICA -->
+<section id="mecanica">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>03 · A mecânica</div>
+    <div class="head"><h2>Do reel à mesa do consultor, sem ninguém pedir orçamento.</h2>
+      <p class="lead">O conteúdo abre uma dúvida que só se resolve com a conta da pessoa. A palavra-chave no comentário leva a conversa pro direct.</p></div>
+    <div class="flow">
+      <div class="node"><span class="ic">🎬</span><h3>Reel com dúvida</h3><p>"Consórcio ou financiamento pro apê de R$500 mil?"</p><span class="who">Conteúdo</span></div>
+      <div class="node"><span class="ic">💬</span><h3>Comenta a palavra</h3><p>"Comenta CONTA que eu te mando a simulação."</p><span class="who">Seguidor</span></div>
+      <div class="node hot"><span class="ic">⚡</span><h3>Direct automático</h3><p>Entrega o material e pergunta o objetivo: imóvel, carro, empresa.</p><span class="who">Automação</span></div>
+      <div class="node"><span class="ic">📲</span><h3>Consultor assume</h3><p>Lead já chega com objetivo e valor. Conversa no WhatsApp.</p><span class="who">Time FR</span></div>
+      <div class="node"><span class="ic">🔑</span><h3>Simulação → venda</h3><p>A carta certa pro tamanho do sonho.</p><span class="who">Venda</span></div>
+    </div>
+
+    <div class="dm">
+      <div>
+        <div class="label" style="margin-bottom:12px">Como fica no direct</div>
+        <div class="chat" id="chat" aria-live="polite">
+          <div class="hd"><span class="av">FR</span>frconsorcios1</div>
+        </div>
+        <button class="replay" type="button" id="replay">↻ Rodar de novo</button>
+      </div>
+      <div>
+        <ul class="list">
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>Comentário sobe o alcance:</b> o algoritmo lê palavra-chave como engajamento e entrega o reel pra mais gente.</span></li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>O lead já vem qualificado:</b> objetivo, valor e prazo antes do consultor dizer "oi".</span></li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>Uma palavra só, sempre:</b> CONTA. O seguidor aprende o hábito e o direct pergunta o objetivo. O número de comentários de cada post mostra qual dúvida mais puxa conversa.</span></li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--pounamu)"/></svg><span><b>Quem não comenta, segue:</b> o post promete a próxima dúvida respondida.</span></li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--amber)"/></svg><span><b>Já testado no nicho:</b> Rauber usa "Comenta HERANÇA" e o Consórcio Sincero usa "comenta BLACK".</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILARES -->
+<section id="pilares">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>04 · Pilares</div>
+    <div class="head"><h2>4 pilares: duvidar, provar, mostrar o time e rir junto.</h2></div>
+    <div class="donut">
+      <svg viewBox="0 0 42 42" id="donut" role="img" aria-label="Divisão dos pilares: 35% Dúvida, 25% Prova, 20% Bastidor, 20% Humor"></svg>
+      <div class="pillars" style="grid-template-columns:repeat(2,minmax(0,1fr))" id="pillars"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFIL -->
+<section id="perfil">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>05 · Perfil</div>
+    <div class="grid2" style="align-items:start">
+      <div>
+        <h2>O perfil precisa dizer em 3 segundos por que seguir.</h2>
+        <p class="lead">Nome pesquisável, número de prova na bio e um link que abre conversa.</p>
+        <div class="duo">
+          <div class="box"><span class="label">@palomaconsorcios</span><h3>A CEO</h3><p>Liderança, time, bastidor de quem já rotacionou R$120 mi. Atrai empresário.</p></div>
+          <div class="box line"><span class="label">@frconsorcios1</span><h3>A resposta</h3><p>Dúvida de consórcio, prova de cliente, time em ação. Atrai comprador.</p></div>
+        </div>
+        <p class="muted" style="font-size:13px;margin-top:14px">Os dois perfis se ajudam: collab em todo post de prova e de bastidor.</p>
+      </div>
+      <div class="profile">
+        <div class="toggle" role="tablist"><button id="bioOld" class="on" type="button">Hoje</button><button id="bioNew" type="button">Proposto</button></div>
+        <div class="prof-h"><div class="avatar">FR</div><div><div class="prof-name" id="pName"></div><div class="prof-cat" id="pCat"></div></div></div>
+        <div class="prof-bio" id="pBio"></div>
+        <div class="prof-hl" id="pHl"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÉRIES -->
+<section id="series">
+  <svg class="koru-bg" style="right:-140px;top:40px;width:480px;height:480px" viewBox="0 0 100 100"><path class="koru-path" data-turns="2.8" fill="none" stroke-width=".4"/></svg>
+  <div class="wrap" style="position:relative">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>06 · Séries-assinatura</div>
+    <div class="head"><h2>Formatos fixos que o seguidor reconhece em 1 segundo.</h2></div>
+    <div class="series">
+      <div class="serie"><span class="em">⚖️</span><span class="freq">Semanal · Reel</span><h3>"Faz sentido?"</h3><p>Duas opções, uma conta na tela. Financiamento x consórcio, uma carta x várias.</p><span class="src">Base: Razia · 122 mil curtidas + A7</span></div>
+      <div class="serie"><span class="em">🎬</span><span class="freq">Quinzenal · Reel</span><h3>Baseado em fatos reais</h3><p>Cliente contemplado conta a estratégia. Já é o post com mais comentários da FR.</p><span class="src">Base: Rauber · 22 mil views + A7</span></div>
+      <div class="serie"><span class="em">📩</span><span class="freq">Semanal · Carrossel</span><h3>Pergunta da DM</h3><p>A dúvida que chegou no direct vira carrossel com palavra-chave.</p><span class="src">Base: Rauber · pergunta da herança</span></div>
+      <div class="serie"><span class="em">😅</span><span class="freq">Quinzenal · Reel</span><h3>Vida de consultor</h3><p>Humor com o time: o que só quem vende consórcio ouve.</p><span class="src">Base: Sincero · meme e esquete (78 mil views)</span></div>
+      <div class="serie"><span class="em">🏆</span><span class="freq">Mensal · Reel</span><h3>Fechamento FR</h3><p>Almoço do Milhão, destaque do mês e número na tela.</p><span class="src">Base: A7 · quadrimestre, 6,5 mil</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEMANA -->
+<section id="semana">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>07 · Semana-tipo</div>
+    <div class="head"><h2>2 reels + 1 carrossel. Os stories do time seguram o resto.</h2></div>
+    <div class="weekgrid">
+      <div class="day post"><span class="dn">Seg</span><span class="fmt">Reel</span><small>Dúvida · "Faz sentido?" ou mito</small><span class="pill p-jade" style="align-self:flex-start">Seguidores</span></div>
+      <div class="day"><span class="dn">Ter</span><small class="st">Stories: enquete da dúvida da semana</small></div>
+      <div class="day post"><span class="dn">Qua</span><span class="fmt">Carrossel</span><small>Pergunta da DM + palavra-chave</small><span class="pill p-green" style="align-self:flex-start">Conversa</span></div>
+      <div class="day"><span class="dn">Qui</span><small class="st">Stories: caixinha "pergunta pro consultor"</small></div>
+      <div class="day post"><span class="dn">Sex</span><span class="fmt">Reel</span><small>Prova, bastidor ou humor do time</small><span class="pill p-grey" style="align-self:flex-start">Confiança</span></div>
+      <div class="day"><span class="dn">Sáb</span><small class="st">Stories: repost de cliente</small></div>
+      <div class="day"><span class="dn">Dom</span><small class="st">Stories: resposta da caixinha</small></div>
+    </div>
+    <div class="label" style="margin-top:56px">Primeiro mês · toque num post para ver a ideia completa</div>
+    <div class="cal" id="cal"></div>
+  </div>
+</section>
+
+<!-- IDEIAS -->
+<section id="ideias">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>08 · Banco de ideias</div>
+    <div class="head"><h2>30 pautas prontas para gravar.</h2><p class="lead">Cada uma com gancho, palavra-chave e de onde veio a inspiração.</p></div>
+    <div class="filters" id="filters">
+      <button type="button" class="on" data-f="all">Todas</button>
+      <button type="button" data-f="Seguidores">Seguidores</button><button type="button" data-f="Conversa">Conversa</button><button type="button" data-f="Confiança">Confiança</button>
+      <span class="sep"></span>
+      <button type="button" data-f="Reel">Reels</button><button type="button" data-f="Carrossel">Carrosséis</button>
+    </div>
+    <div class="ideas" id="ideas"></div>
+  </div>
+</section>
+
+<!-- METAS -->
+<section id="metas">
+  <div class="wrap">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>09 · Metas e simulador</div>
+    <div class="head"><h2>Quantas conversas o perfil pode entregar por mês?</h2>
+      <p class="lead">Mexa nas premissas. Os valores iniciais partem da média das referências; o número real a gente mede no 1º mês.</p></div>
+    <div class="sim">
+      <div class="chart sl">
+        <div><label for="sAlc">Views médias por post <b id="vAlc"></b></label><input type="range" id="sAlc" min="500" max="10000" step="100" value="2000"><small>Hoje: ~760 (mediana) · referências: 1,6 mil a 3,3 mil</small></div>
+        <div><label for="sCta">Posts com palavra-chave no mês <b id="vCta"></b></label><input type="range" id="sCta" min="2" max="12" step="1" value="8"><small>De 12 posts por mês</small></div>
+        <div><label for="sCom">Comentam a palavra <b id="vCom"></b></label><input type="range" id="sCom" min="0.2" max="3" step="0.1" value="1"><small>% de quem viu</small></div>
+        <div><label for="sConv">Viram conversa no WhatsApp <b id="vConv"></b></label><input type="range" id="sConv" min="10" max="80" step="5" value="40"><small>% de quem recebeu o direct</small></div>
+      </div>
+      <div class="out">
+        <span class="label">Conversas novas para o time por mês</span>
+        <b class="big num" id="oConv">67</b>
+        <div class="funnelv" id="fv"></div>
+        <p class="muted" style="font-size:12px">Premissas de referência, não promessa. Ajustamos com os dados reais depois de 30 dias.</p>
+      </div>
+    </div>
+    <div class="kpis">
+      <div class="kpi" style="border-top-color:var(--pounamu)"><span class="label">Seguidores</span><b>3 mil</b><p>em 90 dias (hoje 722)</p></div>
+      <div class="kpi"><span class="label">Views por reel</span><b>2 mil</b><p>média das referências, em 60 dias</p></div>
+      <div class="kpi"><span class="label">Comentários com palavra</span><b>30+</b><p>por post com CTA</p></div>
+      <div class="kpi"><span class="label">Conversas</span><b>50/mês</b><p>entregues ao time de vendas</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÓXIMOS -->
+<section id="proximos">
+  <svg class="koru-bg" style="left:50%;top:-80px;width:560px;height:560px" viewBox="0 0 100 100"><path class="koru-path" data-turns="3.2" fill="none" stroke-width=".35"/></svg>
+  <div class="wrap" style="position:relative">
+    <div class="tag"><svg class="koru" viewBox="0 0 100 100" data-turns="2.2"></svg>10 · Próximos passos</div>
+    <div class="head"><h2>Começa na semana que vem.</h2></div>
+    <div class="next">
+      <div class="nx"><span class="i">1</span><div><h3>Aprovar bio, nome e destaques</h3><p>Nome pesquisável, Top 100 HS e R$120 mi rotacionados na bio, link pro WhatsApp.</p></div><span class="pill p-green">Esta semana</span></div>
+      <div class="nx"><span class="i">2</span><div><h3>Arquivar política e economia</h3><p>Sai do grid tudo que não responde dúvida nem mostra cliente ou time.</p></div><span class="pill p-green">Esta semana</span></div>
+      <div class="nx"><span class="i">3</span><div><h3>Ativar automação de direct</h3><p>ManyChat com uma palavra única, CONTA, e perguntas de objetivo no direct.</p></div><span class="pill p-amber">Até 13/11</span></div>
+      <div class="nx"><span class="i">4</span><div><h3>Definir quem atende as conversas</h3><p>Um consultor responsável e prazo de resposta de até 1 hora.</p></div><span class="pill p-amber">Até 13/11</span></div>
+      <div class="nx"><span class="i">5</span><div><h3>1º dia de gravação</h3><p>8 reels numa tarde: 2 consultoras, 2 clientes contemplados, o escritório.</p></div><span class="pill p-amber">Semana de 09/11</span></div>
+      <div class="nx"><span class="i">6</span><div><h3>Revisão de 30 dias</h3><p>Seguidores, views, comentários por palavra e conversas que viraram simulação.</p></div><span class="pill p-grey">09/12</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" hidden><button type="button" class="lb-close" aria-label="Fechar">×</button><img id="lbImg" alt=""></div>
+
+<footer><div class="wrap"><span>FR Consórcios · Estratégia de Instagram · Nov/2026</span><span><img src="paloma-assets/full.png" alt="Puna">Estratégia de Growth</span></div></footer>
+
+<script>
+function koruPath(turns){const pts=[];const N=Math.round(turns*60);const a=1.2,b=(46-a)/(turns*2*Math.PI);
+  for(let i=0;i<=N;i++){const t=i/N*turns*2*Math.PI;const r=a+b*t;pts.push([50+r*Math.cos(t),50+r*Math.sin(t)])}
+  const last=pts[pts.length-1];pts.push([last[0],last[1]+8]);return 'M'+pts.map(p=>p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' L')}
+document.querySelectorAll('svg.koru').forEach(s=>{s.innerHTML='<path d="'+koruPath(+s.dataset.turns||2.4)+'" fill="none" stroke="var(--pounamu)" stroke-width="7" stroke-linecap="round"/>'});
+document.querySelectorAll('path.koru-path').forEach(p=>p.setAttribute('d',koruPath(+p.dataset.turns||3)));
+const fmtK=v=>v>=1000?(v/1000).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mil':String(Math.round(v));
+
+// raio-x FR (curtidas) · g=good, n=neutro, b=bad
+const fr=[["Almoço do Milhão · outubro",70,"g"],["FR completa 2 anos · o time",69,"g"],["Parabéns, Bárbara · destaque de setembro",40,"g"],["Almoço do Milhão · R$8,5 mi",33,"g"],["Reel · \"o cenário político mudou\"",31,"b"],["Reel · greve da Caixa",26,"b"],["Reel · por trás dos milhões",25,"g"],["Reel · Baseado em fatos reais (contemplação)",23,"g"],["Destaque de outubro · Camila R$2,3 mi",18,"g"],["Reel · \"Lula venceu, e agora?\"",14,"b"],["Carrossel · consórcio não é só para casa",11,"n"],["Reel · Outubro Rosa",6,"n"],["Carrossel · \"Lula ou Flávio?\"",4,"b"],["Reel · mesmo valor, 3 possibilidades",3,"n"],["Reel · propaganda é confiança",2,"n"]];
+document.getElementById('frBars').innerHTML=fr.map(([l,v,c])=>`<div class="bar ${c==='g'?'good':c==='b'?'bad':''}"><span class="l" title="${l.replace(/"/g,'&quot;')}">${l}</span><span class="t"><span class="f" data-w="${Math.max(v/70*100,1.5)}"></span></span><span class="v">${v}</span></div>`).join('');
+
+// comparativo das contas
+const V={
+ fr:[1464,1166,1030,803,801,767,748,463,442,344,334,278],
+ rauber:[22000,10400,6974,6869,6746,5565,4407,4373,4330,3963,3767,3684,3607,3565,3558,3178,3172,3057,3029,3026,2770,2759,2658,2621,2085,1741,1559,1500,1481,1462,1446,1426,1381,1351,1339,1238,1192,1091,1082,1071,1036,1022,1009,986,971,943,725,692,537,495,396,324],
+ a7:[127000,77300,31300,16500,11400,7348,7281,6519,6490,5453,4627,4169,3753,3307,3085,2670,2643,2336,1767,1721,1695,1644,1644,1608,1574,1391,1383,1380,1206,1192,1155,1148,1133,1105,1093,987,967,704,671,670,648,408,275,267],
+ toco:[8795,4767,4228,4181,4107,3626,3567,3393,3266,3130,3122,3051,2883,2851,2659,2618,2373,2359,2326,2326,2276,2205,2160,2106,1968,1826,1727,1657,1601,1535,1395,1382,1368,1358,1329,1210,1077,943,905,829,810,776,546,515,438,437,397,316]
+};
+V.sincero=[195000,107000,78500,72400,42900,24200,19000,12500,8049,7660,7364,6626,6550,6173,5979,5927,5303,5220,3789,3753,3629,3577,3470,3332,3245,3215,3175,2848,2724,2376,2310,2290,2261,2215,2210,2149,2141,2132,2105,2039,1928,1784,1778,1641,1611,1430,1002,311];
+const ACC=[["fr","frconsorcios1",722,"me"],["rauber","rauberconsorcio",19200],["a7","a7consorcioseinvestimentos",5965],["toco","toco.consorcios",3506],["sincero","consorciosincero",139000]];
+const med=a=>{const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
+const LMAX=Math.log10(200000),LMIN=Math.log10(200),ly=x=>Math.max(2,(Math.log10(Math.max(x,200))-LMIN)/(LMAX-LMIN)*100);
+document.getElementById('cmp').innerHTML=ACC.map(([k,h,f,me])=>{const v=V[k],md=med(v),top=Math.max(...v);
+ return `<div class="acc ${me||''}"><a class="h" href="https://www.instagram.com/${h}/" target="_blank" rel="noopener">@${h}</a>
+ <div class="fol num">${fmtK(f)}<small>seguidores</small></div><div class="ring"><i data-w="${Math.log10(f/500)/Math.log10(300)*100}"></i></div>
+ <div class="strip">${v.map(x=>`<span style="height:${ly(x)}%"></span>`).join('')}<div class="avg" style="bottom:${ly(md)}%"><em>${fmtK(md)}</em></div></div>
+ <div class="kv"><div><span class="label">Mediana</span><b class="num">${fmtK(md)}</b></div><div><span class="label">Melhor</span><b class="num">${fmtK(top)}</b></div></div></div>`}).join('');
+
+// referências
+// [img, código do reel, número grande, unidade, linha de apoio, tipo, o que é]
+const R=[
+ {u:"rauberconsorcio",f:"19,2 mil seguidores",bio:"Contemplação | Ensino estratégia para acelerar consórcio\n+14 anos investindo | 100+ milhões sob gestão",steal:"Cliente contemplado com nome e estratégia, conta na tela e humor de bastidor. E ele já usa \"Comenta HERANÇA\" para levar a conversa pro direct.",p:[
+  ["rauber-contemplada","Ddb3muvBzFP",22000,"views","383 curtidas","Prova","Andréia contemplada na 1ª parcela com estratégia de lance: o reel mais visto do perfil."],
+  ["rauber-invest","DeH3HyNhcY5",10400,"views","271 curtidas","Conta na tela","Texto com a conta do INSS x consórcio, gravado no carro. Simples de produzir."],
+  ["rauber-vendedor","DeebyKshMb4",6869,"views","178 curtidas","Humor","\"A vida do vendedor é tranquila\": a história das funcionárias fictícias do WhatsApp."],
+  ["rauber-heranca","Deb01XSBXkX",3767,"views","20 comentários","Comenta a palavra","\"E se seus pais não deixarem herança?\" com \"Comenta HERANÇA\" na legenda."]]},
+ {u:"a7consorcioseinvestimentos",f:"6 mil seguidores · Porto Alegre",bio:"Top 17 no Brasil · HS Consórcios\nConsórcios para alavancagem, aquisição e investimentos",steal:"Concorrente direto na cidade. Cada consultor publica em collab com a A7, então o reel sai nos dois perfis. Contemplação filmada na hora, com emoção.",p:[
+  ["a7-taina","DeugVK8uO3L",7348,"views","44 comentários","Prova","Entrega da contemplação da Tainá, filmada pela consultora em Porto Alegre."],
+  ["a7-341","DesOerrSq8W",7281,"views","251 curtidas","Prova","\"Pagaram uma parcela de R$341 e já foram contemplados\": número no título."],
+  ["a7-financiamento","Deu04cbRIOP",6490,"views","collab","Dúvida","\"Financiamento, à vista ou consórcio?\" do consultor Andrew, em collab."],
+  ["a7-consultor","DeedPELBIFh",5453,"views","36 comentários","Time","Consultor se apresenta: experiência, certificação e propósito. Collab com a A7."]]},
+ {u:"toco.consorcios",f:"3,5 mil seguidores",bio:"+30 anos realizando sonhos\n+1 bilhão comercializado · credenciada HS",steal:"Presença na comunidade (peneira de futebol, Dia das Crianças), história de cliente com produção de documentário e o \"quem é quem\" do consórcio.",p:[
+  ["toco-peneira","DWQCB4ejVIN",8795,"views","165 curtidas","Comunidade","Peneira de futebol com 500 jovens em Montenegro, com a marca Toco no evento."],
+  ["toco-adm","DeAL8ufhN9H",4107,"views","explicação","Dúvida","\"Administradora x corretora\": quem vende e quem administra o grupo."],
+  ["toco-pai","Db0f07KBWNr",3626,"views","14 reposts","História","Cliente conta como a paternidade mudou o planejamento. Collab com a empresa dele."]]},
+ {u:"consorciosincero",nw:1,f:"139 mil seguidores · Wesley Drews",bio:"Quer aprender a vender mais consórcio?\nMétodo de vendas para consultores",steal:"Corte de podcast com frase polêmica na tela, meme em formato de tweet e esquete do dia a dia do consultor. Ele fecha com \"comenta BLACK e te envio no direct\".",p:[
+  ["sincero-contemplar","Db4QG-lhGgN",195000,"views","190 comentários","Corte polêmico","\"Não interessa quando vai contemplar um consórcio\". A frase divide e gera debate nos comentários."],
+  ["sincero-ese","Db_p3ZCBE-V",107000,"views","339 reposts","Corte polêmico","\"E se as pessoas não fizessem o consórcio?\". Pergunta grande na tela."],
+  ["sincero-meta","DfKG6JvSE7M",78500,"views","3,7 mil curtidas","Meme","Print de tweet: \"dia de fechamento e eu ainda não bati a meta\". Produção zero."],
+  ["sincero-black","DfSznnCoGej",12500,"views","88 comentários","Esquete + palavra","\"Vendedor de consórcio quando a venda sai muito fácil\" + \"comenta BLACK\"."]]},
+ {u:"luizrazia",nw:1,f:"283 mil seguidores · nicho de carros",bio:"Ex-piloto, diretor da Rockset Filmes\nConsórcio de Veículos na bio",steal:"Prova de que o assunto viraliza fora da bolha: um criador de carros no quadro branco fazendo a conta consórcio x financiamento. Collab com influenciador local de carro ou imóvel é caminho.",p:[
+  ["razia-calculo","DGaoTUzO8Al",122300,"curtidas","7,4 mil comentários","Conta no quadro","\"Agora vamos aos cálculos de consórcio vs financiamento\": carro de R$100 mil, carta de R$200 mil."]]}
+];
+document.getElementById('refs').innerHTML=R.map(r=>`<article class="ref"><div class="ref-info"><div class="who"><a href="https://www.instagram.com/${r.u}/" target="_blank" rel="noopener">@${r.u}</a>${r.nw?'<span class="newtag">nova</span>':''}<div class="label" style="margin-top:6px">${r.f}</div></div><p class="bio">${r.bio}</p><p class="steal"><span>O que vamos roubar</span>${r.steal}</p></div>
+ <div class="shots">${r.p.map(([img,c,v,un,sub,k,what])=>`<figure class="shot"><button type="button" class="zoom" data-src="fr-assets/${img}.jpg" aria-label="Ampliar print"><img src="fr-assets/${img}.jpg" alt="Print do reel de @${r.u}: ${what.replace(/"/g,'')}" loading="lazy"></button><figcaption><span class="big num">${fmtK(v)}<small>${un.toUpperCase()}</small></span><span class="sub">${sub}</span><span class="kind" style="flex-basis:100%">${k}</span><span class="what">${what}</span><a class="go" href="https://www.instagram.com/reel/${c}/" target="_blank" rel="noopener">Abrir no Instagram ↗</a></figcaption></figure>`).join('')}</div></article>`).join('');
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
+document.addEventListener('click',e=>{const z=e.target.closest('.zoom');if(z){lbImg.src=z.dataset.src;lbImg.alt=z.querySelector('img').alt;lb.hidden=false;return}if(!lb.hidden&&e.target.closest('#lightbox'))lb.hidden=true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true});
+
+// chat animado
+const MSG=[["c","Comentou CONTA no reel"],["b","Oi! Aqui está a simulação: apê de R$500 mil, financiamento x consórcio 📊"],["b","Pra te mandar a conta certa: o que você quer conquistar?"],["u","Um apartamento, até uns 400 mil"],["b","Perfeito. Em quanto tempo você gostaria de estar com a chave?"],["u","Uns 2 anos"],["b","A Camila, nossa consultora, vai te chamar no WhatsApp com 3 cenários. Pode ser?"],["u","Pode sim!"]];
+const chat=document.getElementById('chat');let timers=[];
+function play(){timers.forEach(clearTimeout);timers=[];chat.querySelectorAll('.msg').forEach(m=>m.remove());
+ MSG.forEach(([t,x],i)=>{const d=document.createElement('div');d.className='msg '+t;d.textContent=x;chat.appendChild(d);timers.push(setTimeout(()=>d.classList.add('in'),300+i*900))})}
+document.getElementById('replay').onclick=play;
+if('IntersectionObserver' in window){const co=new IntersectionObserver(es=>{if(es[0].isIntersecting){play();co.disconnect()}},{threshold:.4});co.observe(chat);setTimeout(()=>{if(!chat.querySelector('.msg'))play()},4000)}else play();
+
+// pilares + donut
+const PIL=[["Dúvida e mito",35,"Comparação, conta na tela, mito derrubado. Traz seguidor e comentário.","Ex.: \"Consórcio ou financiamento? A conta de um apê de R$500 mil\"","#3C6E52"],
+ ["Prova real",25,"Cliente contemplado, valor da parcela, tempo até a chave.","Ex.: \"Baseado em fatos reais: contemplada na 3ª parcela\"","#8FC3A5"],
+ ["Bastidor do time",20,"Consultoras, Almoço do Milhão, destaque do mês, Top 100 HS.","Ex.: \"Como a FR chegou a R$120 milhões rotacionados\"","#C7C7C7"],
+ ["Humor e vida de consultor",20,"O que só consultor ouve. Rende alcance e compartilhamento.","Ex.: \"POV: o cliente perguntando quando vai ser sorteado\"","#8A8A8A"]];
+let acc=0;const C=2*Math.PI*15.9;
+document.getElementById('donut').innerHTML=`<circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--border)" stroke-width="5"/>`+PIL.map(([n,p,,,c])=>{const s=`<circle cx="21" cy="21" r="15.9" fill="none" stroke="${c}" stroke-width="5" stroke-dasharray="${p/100*C-.4} ${C}" stroke-dashoffset="${-acc/100*C}" transform="rotate(-90 21 21)"/>`;acc+=p;return s}).join('')+`<text x="21" y="20" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="6" fill="#fff">12</text><text x="21" y="25.5" text-anchor="middle" font-family="Poppins" font-size="2.6" fill="#8A8A8A">posts/mês</text>`;
+document.getElementById('pillars').innerHTML=PIL.map(([n,p,d,e,c],i)=>`<div class="pillar ${i===0?'big':''}" style="border-top-color:${c}"><span class="pct" style="color:${c}">${p}%</span><h3>${n}</h3><p>${d}</p><span class="ex">${e}</span></div>`).join('');
+
+// bio
+const bios={
+ old:{name:"FR CONSÓRCIOS",cat:"Serviços financeiros",bio:"🏆TOP 100 HS Consórcios\n+8 anos de experiência no mercado\nEstratégias para realizar sonhos e construir patrimônio\nfrconsorcioseinvestimentos.com.br/bio",hl:[["✍","Clientes"],["🔑","Contempladas"]]},
+ new:{name:"FR Consórcios | Imóvel, carro e empresa",cat:"Serviços financeiros",bio:"🏆 Top 100 HS · R$120 mi rotacionados\nA gente faz a conta antes de você assinar\nImóvel · Veículo · Empresa · Investimento\n↓ Simule no WhatsApp em 2 minutos",hl:[["?","Dúvidas"],["🔑","Contemplados"],["R$","Simule"],["FR","O time"],["🎥","Sorteios"]]}
+};
+function showBio(k){const b=bios[k];pName.textContent=b.name;pCat.textContent=b.cat;pBio.textContent=b.bio;pHl.innerHTML=b.hl.map(([i,l])=>`<div><i>${i}</i>${l}</div>`).join('');bioOld.classList.toggle('on',k==='old');bioNew.classList.toggle('on',k==='new')}
+bioOld.onclick=()=>showBio('old');bioNew.onclick=()=>showBio('new');showBio('old');
+
+// ideias: [objetivo, formato, título, gancho, palavra-chave/CTA, inspiração]
+const I=[
+["Seguidores","Reel","Consórcio ou financiamento? A conta de um apê de R$500 mil","\"O banco não te mostra essa conta. Eu mostro.\" Quadro branco, uma conta só.","CONTA","Razia · quadro branco (122 mil curtidas) + A7"],
+["Conversa","Reel","Pagou uma parcela e foi contemplado: como?","\"Ela pagou 1 parcela e pegou a chave. Não foi sorte.\"","CONTA","A7 · parcela de R$341 (7,3 mil)"],
+["Conversa","Carrossel","R$1 milhão em uma carta ou em várias?","\"A mesma grana, dois resultados bem diferentes.\"","CONTA","A7 · uma carta ou várias (4,6 mil)"],
+["Seguidores","Reel","A vida do consultor de consórcio é tranquila","Corte rápido: celular tocando, cliente pedindo \"só uma simulação\".","Marca um consultor","Rauber · vida do vendedor (6,9 mil)"],
+["Seguidores","Reel","\"Não importa quando você contempla\": concorda?","Frase polêmica em letra grande, corte de conversa com a Paloma.","Concorda ou discorda?","Sincero · corte polêmico (195 mil views)"],
+["Conversa","Reel","E se seus pais não deixarem herança?","\"Talvez você seja a primeira geração a construir patrimônio.\"","CONTA","Rauber · herança (20 comentários)"],
+["Seguidores","Carrossel","Administradora x corretora: quem é quem","\"Você sabe com quem assinou seu consórcio?\"","Salva e confere o seu","Toco · administradora x corretora (4,1 mil)"],
+["Seguidores","Reel","Mito: consórcio é só sorteio","\"Quem espera sorteio espera. Quem dá lance, chega antes.\"","CONTA","Raio-X FR · explicação sem gancho"],
+["Conversa","Carrossel","Lance embutido: o que é e quando vale","\"Dá pra dar lance sem tirar dinheiro do bolso?\"","CONTA","Camila · lance FIPE"],
+["Conversa","Carrossel","Carta para empresa: crescer sem juro de banco","\"Sua empresa precisa de caminhão, sala ou máquina?\"","CONTA","A7 · alavancagem"],
+["Conversa","Reel","Consórcio como investimento: a alavancagem patrimonial","\"Tem investidor usando consórcio pra multiplicar imóvel.\"","CONTA","A7 · diversificação (5,7 mil)"],
+["Seguidores","Carrossel","5 perguntas antes de assinar qualquer consórcio","\"Se o vendedor não responde isso, desconfia.\"","Salva antes de assinar","Toco · quem é quem"],
+["Conversa","Reel","Quanto custa esperar 1 ano pra comprar o imóvel","Conta na tela: aluguel pago + valorização perdida.","CONTA","Rauber · pergunta que mexe no bolso"],
+["Conversa","Carrossel","Carro de R$120 mil: 3 cenários com o mesmo valor","\"O mesmo dinheiro, três carros diferentes na garagem.\"","CONTA","FR · \"3 possibilidades\" com gancho novo"],
+["Conversa","Carrossel","Taxa de administração x juros: a comparação honesta","\"Consórcio também tem custo. Vamos falar dele.\"","CONTA","A7 · pergunta comparativa"],
+["Confiança","Carrossel","Contemplou, e agora? Do sorteio até a chave","Passo a passo em 6 slides, com prazo de cada etapa.","Salva pra quando chegar a sua vez","Toco · explicação"],
+["Conversa","Carrossel","Pode usar FGTS no consórcio?","Pergunta da DM: quando pode e como funciona.","CONTA","Pergunta da DM"],
+["Seguidores","Reel","\"Consórcio é dinheiro parado\"? Respondendo comentário","Comentário real na tela e a resposta em 20 segundos.","Deixa sua dúvida","Rauber · interação"],
+["Confiança","Reel","Baseado em fatos reais: contemplada na 3ª parcela","Cliente conta a estratégia, com a chave na mão.","CONTA","Rauber · contemplada na 1ª parcela (22 mil) + FR"],
+["Confiança","Reel","Destaque do mês: a consultora que vendeu R$2,3 mi","\"O que ela faz diferente? Perguntei pra ela.\"","Segue pra ver o próximo","A7 · depoimento do time"],
+["Confiança","Reel","Almoço do Milhão: o fechamento do mês","Número na tela: \"R$8,5 milhões em um mês\".","Segue a FR","A7 · \"esse foi o nosso quadrimestre\" (6,5 mil)"],
+["Confiança","Reel","Live do sorteio: quem foi contemplado hoje","Corte da reação ao vivo do cliente.","Ativa o lembrete da próxima","FR · TBT da live"],
+["Confiança","Reel","Top 100 HS: o que isso muda pra você","\"Entre centenas de escritórios, estamos entre os 100.\"","Segue a FR","Bio do Rauber · número de prova"],
+["Seguidores","Reel","POV: o cliente perguntando quando vai ser sorteado","Esquete com 2 consultoras, um take.","Marca quem pergunta isso","Sincero · esquete do consultor"],
+["Seguidores","Reel","Coisas que só consultor de consórcio ouve","Trend de lista: \"Isso é pirâmide?\", \"Tem juros?\".","Qual você já ouviu?","Rauber · humor"],
+["Seguidores","Reel","Um dia na FR, na Assis Brasil","Bastidor do escritório, das 8h ao fechamento.","Segue pra ver amanhã","Toco · presença local"],
+["Seguidores","Reel","Collab: influenciador de carro ou imóvel faz a conta com a FR","Um criador local no quadro branco com a consultora.","CONTA","Razia · nicho de carros falando de consórcio"],
+["Seguidores","Reel","Meme: \"cliente ligando no dia da assembleia\"","Print de tweet da FR + imagem engraçada. 7 segundos, produção zero.","Marca quem faz isso","Sincero · meme tweet (78 mil views)"],
+["Conversa","Reel","Imóvel, carro ou empresa: qual carta primeiro?","\"Tenho R$3 mil por mês. Por onde começo?\"","CONTA","A7 · alavancagem"],
+["Confiança","Carrossel","Por que a gente faz a conta antes de vender","Manifesto da FR: transparência como regra.","Link na bio","Posicionamento novo"]
+];
+const idEl=document.getElementById('ideas');
+const pc=o=>o==='Seguidores'?'p-jade':o==='Conversa'?'p-green':'p-grey';
+idEl.innerHTML=I.map((x,i)=>{const kw=/^[A-ZÇÃÔÊÉ]+$/.test(x[4]);return `<article class="idea" id="idea${i+1}" data-st="${x[0]}" data-fmt="${x[1]}"><div class="top"><span class="n">#${String(i+1).padStart(2,'0')}</span><span class="pillrow"><span class="pill ${pc(x[0])}">${x[0]}</span><span class="pill p-grey">${x[1]}</span></span></div><h3>${x[2]}</h3><p class="hook">${x[3]}</p>${kw?`<span class="kw">COMENTA ${x[4]}</span>`:''}<div class="meta">${kw?'':`<span><b>CTA:</b> ${x[4]}</span>`}<span><b>Inspiração:</b> ${x[5]}</span></div></article>`}).join('');
+const cards=[...idEl.children];
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f;
+ cards.forEach(c=>c.hidden=!(f==='all'||c.dataset.st===f||c.dataset.fmt===f))});
+
+// calendário mês 1
+const cal=[["Sem 1 · 9–13 nov",[["Seg 09/11",1],["Qua 11/11",9],["Sex 13/11",19]]],["Sem 2 · 16–20 nov",[["Seg 16/11",4],["Qua 18/11",3],["Sex 20/11",2]]],["Sem 3 · 23–27 nov",[["Seg 23/11",8],["Qua 25/11",10],["Sex 27/11",25]]],["Sem 4 · 30 nov–4 dez",[["Seg 30/11",6],["Qua 02/12",14],["Sex 04/12",21]]]];
+document.getElementById('cal').innerHTML=cal.map(([w,s])=>`<div class="wk"><span class="label">${w}</span>${s.map(([d,n])=>{const x=I[n-1];return `<div class="slot" tabindex="0" data-go="${n}"><span class="d"><span>${d}</span><span>${x[1]}</span></span><b>${x[2]}</b></div>`}).join('')}</div>`).join('');
+const calEl=document.getElementById('cal');
+function go(e){const s=e.target.closest('.slot');if(!s)return;document.querySelector('#filters [data-f=all]').click();const c=document.getElementById('idea'+s.dataset.go);c.scrollIntoView({behavior:'smooth',block:'center'});c.classList.add('flash');setTimeout(()=>c.classList.remove('flash'),2200)}
+calEl.addEventListener('click',go);calEl.addEventListener('keydown',e=>{if(e.key==='Enter')go(e)});
+
+// simulador
+const S=id=>document.getElementById(id);
+function sim(){const alc=+S('sAlc').value,cta=+S('sCta').value,com=+S('sCom').value/100,conv=+S('sConv').value/100;
+ const views=alc*12,reach=alc*cta,cm=reach*com,cv=cm*conv;
+ S('vAlc').textContent=fmtK(alc);S('vCta').textContent=cta;S('vCom').textContent=(com*100).toLocaleString('pt-BR')+'%';S('vConv').textContent=Math.round(conv*100)+'%';
+ S('oConv').textContent=Math.round(cv).toLocaleString('pt-BR');
+ const rows=[["Views no mês",views],["Em posts com CTA",reach],["Comentam a palavra",cm],["Conversas",cv]];
+ S('fv').innerHTML=rows.map(([l,v])=>`<div class="fv"><span>${l}</span><span class="t"><i style="width:${Math.max(v/views*100,1.5)}%"></i></span><b>${fmtK(v)}</b></div>`).join('')}
+['sAlc','sCta','sCom','sConv'].forEach(id=>S(id).addEventListener('input',sim));sim();
+
+// animações
+const fills=[...document.querySelectorAll('[data-w]')];const setW=el=>el.style.width=el.dataset.w+'%';
+const strips=[...document.querySelectorAll('.strip span')];const grow=()=>strips.forEach((s,i)=>{s.style.transitionDelay=(i%52)*12+'ms';s.style.transform='scaleY(1)'});
+if('IntersectionObserver' in window){
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){setW(e.target);io.unobserve(e.target)}}),{threshold:.2});fills.forEach(f=>io.observe(f));
+ const so=new IntersectionObserver(es=>{if(es[0].isIntersecting){grow();so.disconnect()}},{threshold:.2});so.observe(document.getElementById('cmp'));
+ setTimeout(()=>{fills.forEach(setW);grow()},2500);
+}else{fills.forEach(setW);grow()}
+document.querySelectorAll('[data-count]').forEach(el=>{const end=+el.dataset.count,pre=el.dataset.pre||'',suf=el.dataset.suf||'';
+ const f=n=>pre+Math.round(n).toLocaleString('pt-BR')+suf;el.textContent=f(end);if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const t0=performance.now(),d=1400;(function tick(t){const k=Math.min((t-t0)/d,1);el.textContent=f(end*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(tick)})(t0)});
+const secs=[...document.querySelectorAll('section[id]')],links=[...document.querySelectorAll('#navlinks a')];
+if('IntersectionObserver' in window){const no=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});secs.forEach(s=>no.observe(s))}
+</script>
+</body></html>
